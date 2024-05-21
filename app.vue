@@ -1,5 +1,8 @@
 <template>
+  <Header />
   <div>
-    <NuxtWelcome />
+    <NuxtPage />
   </div>
+  <Footer />
+  <UNotifications icon="i-heroicons-check-circle" />
 </template>

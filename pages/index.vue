@@ -1,11 +1,17 @@
 <template>
   <div>
-    trang chu
-    <img src="https://s4.shopbay.vn/files/23/dx118c-64128b376a7b6.jpg">
+    <UContainer class="flex justify-center space-x-5 py-5">
+      <CartContainer />
+      <CartContainer />
+      <CartContainer />
+      <CartContainer />
+    </UContainer>
   </div>
 </template>
 
 <script lang="ts" setup>
+import CartContainer from '~/components/Cart-Container.vue'
+
 const supabase = useSupabaseClient()
 const logout = async () => {
   const { error } = await supabase.auth.signOut()

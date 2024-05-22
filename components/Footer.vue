@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col space-y-6 bg-cool-300 py-12 font-sans">
+  <div class="flex flex-col space-y-6 bg-primary-300 py-12 font-sans">
     <div class="flex justify-around ">
       <!-- col 1 -->
       <div class="flex flex-col space-y-2">

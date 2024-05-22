@@ -1,6 +1,7 @@
 <template>
   <div>
     trang chu
+    <img src="https://s4.shopbay.vn/files/23/dx118c-64128b376a7b6.jpg">
   </div>
 </template>
 

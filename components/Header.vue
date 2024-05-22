@@ -45,9 +45,9 @@ const profile = computed(
 )
 
 const isOpen = ref(false)
-const links = ref();
+const links = ref()
 
-links.value= [
+links.value = [
   [{
     label: 'Trang Chủ',
     // icon: 'i-heroicons-home',
@@ -75,77 +75,74 @@ links.value= [
   }],
 ]
 
-watchEffect(()=>{
-  if(user.value){
-  links.value = [
-    [{
-      label: 'Trang Chủ',
-      // icon: 'i-heroicons-home',
-      to: '/',
-    }, {
-      label: 'Sản Phẩm',
-      // icon: 'i-heroicons-shopping-bag',
-      to: '/san-pham',
-    }, {
-      label: 'Liên Hệ',
-      // icon: 'i-heroicons-user-group',
-      to: '/lien-he',
-    }],
-    [{
-      label: 'Giỏ Hàng',
-      icon: 'i-heroicons-shopping-bag',
-      badge: '1',
-      to: '/gio-hang',
-    },
-    {
-      label: name.value,
-      avatar: {
-        src: profile,
+watchEffect(() => {
+  if (user.value) {
+    links.value = [
+      [{
+        label: 'Trang Chủ',
+        // icon: 'i-heroicons-home',
+        to: '/',
+      }, {
+        label: 'Sản Phẩm',
+        // icon: 'i-heroicons-shopping-bag',
+        to: '/san-pham',
+      }, {
+        label: 'Liên Hệ',
+        // icon: 'i-heroicons-user-group',
+        to: '/lien-he',
+      }],
+      [{
+        label: 'Giỏ Hàng',
+        icon: 'i-heroicons-shopping-bag',
+        badge: '1',
+        to: '/gio-hang',
       },
-    }, {
-      label:'',
-      icon: 'i-heroicons-arrow-right-start-on-rectangle',
-      click: () => {
-        console.log("logout")
-        logout()
-      },
-    }],
-  ]
-}
-  
-})
-
-watchEffect(()=> {
-  if(!user.value){
-    links.value= [
-  [{
-    label: 'Trang Chủ',
-    // icon: 'i-heroicons-home',
-    to: '/',
-  }, {
-    label: 'Sản Phẩm',
-    // icon: 'i-heroicons-shopping-bag',
-    to: '/san-pham',
-  }, {
-    label: 'Liên Hệ',
-    // icon: 'i-heroicons-user-group',
-    to: '/lien-he',
-  }],
-  [{
-    label: 'Giỏ Hàng',
-    icon: 'i-heroicons-shopping-bag',
-    badge: '1',
-    to: '/gio-hang',
-  }, {
-    label: 'Đăng Nhập',
-    icon: 'i-heroicons-users',
-    click: () => {
-      isOpen.value = true
-    },
-  }],
-]
+      {
+        label: name.value,
+        avatar: {
+          src: profile,
+        },
+      }, {
+        label: '',
+        icon: 'i-heroicons-arrow-right-start-on-rectangle',
+        click: () => {
+          console.log('logout')
+          logout()
+        },
+      }],
+    ]
   }
 })
 
-
+watchEffect(() => {
+  if (!user.value) {
+    links.value = [
+      [{
+        label: 'Trang Chủ',
+        // icon: 'i-heroicons-home',
+        to: '/',
+      }, {
+        label: 'Sản Phẩm',
+        // icon: 'i-heroicons-shopping-bag',
+        to: '/san-pham',
+      }, {
+        label: 'Liên Hệ',
+        // icon: 'i-heroicons-user-group',
+        to: '/lien-he',
+      }],
+      [{
+        label: 'Giỏ Hàng',
+        icon: 'i-heroicons-shopping-bag',
+        badge: '1',
+        to: '/gio-hang',
+      }, {
+        label: 'Đăng Nhập',
+        icon: 'i-heroicons-users',
+        click: () => {
+          isOpen.value = true
+        },
+      }],
+    ]
+  }
+})
 </script>

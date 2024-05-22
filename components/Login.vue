@@ -29,30 +29,52 @@
     </div>
   </div> -->
   <div class="p-3">
-  <UCard>
-    <div class="space-y-4">
-      <UFormGroup label="Email" name="email">
-        <UInput v-model="form.email" />
-      </UFormGroup>
+    <UCard>
+      <div class="space-y-4">
+        <UFormGroup
+          label="Email"
+          name="email"
+        >
+          <UInput v-model="form.email" />
+        </UFormGroup>
 
-      <UFormGroup label="Password" name="password">
-        <UInput v-model="form.password" type="password" />
-      </UFormGroup>
+        <UFormGroup
+          label="Password"
+          name="password"
+        >
+          <UInput
+            v-model="form.password"
+            type="password"
+          />
+        </UFormGroup>
 
-      <UButton label="Login" color="gray" block />
+        <UButton
+          label="Login"
+          color="gray"
+          block
+        />
 
-      <UDivider label="OR" />
+        <UDivider label="OR" />
 
-      <UButton @click="login" label="Login with Google" block>
-        Login with Google <Icon icon="tabler:brand-google-filled" width="1.2em" height="1.2em" />
-      </UButton>
-    </div>
-  </UCard>
-</div>
+        <UButton
+          label="Login with Google"
+          block
+          @click="login"
+        >
+          Login with Google <Icon
+            icon="tabler:brand-google-filled"
+            width="1.2em"
+            height="1.2em"
+          />
+        </UButton>
+      </div>
+    </UCard>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
+
 const form = reactive({ email: 'mail@example.com', password: 'password' })
 const { query } = useRoute()
 

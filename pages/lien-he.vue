@@ -1,13 +1,11 @@
 <template>
   <div>
-    <Carousel/>
+    <!-- <Carousel/> -->
   </div>
 </template>
 
 <script lang="ts" setup>
-import Carousel from '~/components/Carousel.vue';
-
-
+import Carousel from '~/components/Carousel.vue'
 </script>
 
 <style>

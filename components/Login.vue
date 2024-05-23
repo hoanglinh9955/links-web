@@ -1,33 +1,4 @@
 <template>
-  <!-- <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-    <img
-      class="mx-auto h-40 w-auto"
-      src="https://i.postimg.cc/yxBNZ775/1stlogo.jpg"
-      alt="Your Company"
-    >
-    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-      Links Interior
-    </h2>
-
-    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form
-        class="space-y-6"
-        action="#"
-        method="POST"
-      >
-        <div>
-          <button
-            type="button"
-            class="flex w-full justify-center rounded-md bg-primary-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
-            @click="login"
-          >
-            Login
-          </button>
-        </div>
-      </form>
-
-    </div>
-  </div> -->
   <div class="p-3">
     <UCard>
       <div class="space-y-4">
@@ -35,7 +6,7 @@
           label="Email"
           name="email"
         >
-          <UInput v-model="form.email" />
+          <UInput color="primary" v-model="form.email" />
         </UFormGroup>
 
         <UFormGroup
@@ -57,6 +28,7 @@
         <UDivider label="OR" />
 
         <UButton
+        class="bg-primary-200 hover:bg-primary-400"
           label="Login with Google"
           block
           @click="login"
@@ -72,11 +44,10 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { Icon } from '@iconify/vue'
 
 const form = reactive({ email: 'mail@example.com', password: 'password' })
-const { query } = useRoute()
 
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()

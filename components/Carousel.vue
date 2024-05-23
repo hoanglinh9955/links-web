@@ -1,18 +1,38 @@
 <script setup lang="ts">
 const items = [
-  'https://picsum.photos/600/800?random=1',
-  'https://picsum.photos/600/800?random=2',
-  'https://picsum.photos/600/800?random=3',
-  'https://picsum.photos/600/800?random=4',
- 
+  './1.png',
+  './2.png',
+  './3.png',
 ]
+
+const carouselRef = ref()
+
+onMounted(() => {
+  setInterval(() => {
+    if (!carouselRef.value) return
+
+    if (carouselRef.value.page === carouselRef.value.pages) {
+      return carouselRef.value.select(0)
+    }
+
+    carouselRef.value.next()
+  }, 7000)
+})
 </script>
 
 <template>
-  <UCarousel v-slot="{ item }" :items="items">
-    <!-- <img :src="item" width="300" height="400" draggable="false"> -->
-    <!-- <cart-container -->
-      <Cart-Container width="300" height="400" draggable="false"/>
+  <UCarousel
+    ref="carouselRef"
+    v-slot="{ item }"
+    :items="items"
+    :ui="{ item: 'basis-full' }"
+    class="rounded-lg overflow-hidden"
+    indicators
+  >
+    <img
+      :src="item"
+      class="w-full"
+      draggable="false"
+    >
   </UCarousel>
 </template>
-

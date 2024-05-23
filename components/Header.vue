@@ -1,17 +1,15 @@
 <template>
   <div class="flex mx-10 px-5">
     <div class="flex items-center p-3">
-      <UAvatar
-        size="sm"
-        src="https://avatars.githubusercontent.com/u/739984?v=4"
-        alt="Avatar"
-      />
+      <NuxtLink class="text-3xl" to="/">
+        Links
+      </NuxtLink>
     </div>
     <UHorizontalNavigation
       :links="links"
     >
       <template #default="{ link }">
-        <span class="group-hover:text-primary relative">{{ link.label }}</span>
+        <span class="group-hover:text-primary-200 relative">{{ link.label }}</span>
       </template>
     </UHorizontalNavigation>
   </div>
@@ -22,7 +20,7 @@
   </UModal>
 </template>
 
-<script setup lang="ts">
+<script setup>
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 

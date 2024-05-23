@@ -1,9 +1,9 @@
 <template>
-  <div class="flex flex-col space-y-6 bg-primary-300 py-12 font-sans">
+  <div class="flex flex-col space-y-6 bg-parchment-100 py-12 font-sans mt-20">
     <div class="flex justify-around ">
       <!-- col 1 -->
       <div class="flex flex-col space-y-2">
-        <NuxtLink to="/trang-chu">
+        <NuxtLink to="/">
           Trang Chủ
         </NuxtLink>
         <NuxtLink to="/san-pham">
@@ -81,7 +81,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { Icon } from '@iconify/vue'
 </script>
 

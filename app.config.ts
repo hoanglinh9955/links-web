@@ -4,6 +4,6 @@ export default defineAppConfig({
       // Show toasts at the top right of the screen
       position: 'top-center',
     },
-    primary: 'soft-amber',
+    primary: 'salomie',
   },
 })

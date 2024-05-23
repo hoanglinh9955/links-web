@@ -1,11 +1,10 @@
 import type { Config } from 'tailwindcss'
-import defaultTheme from 'tailwindcss/defaultTheme'
 
 export default <Partial<Config>>{
   theme: {
     extend: {
       colors: {
-        'bluePurple': {
+        bluePurple: {
           50: '#edf1ff',
           100: '#dde6ff',
           200: '#c3cfff',
@@ -18,20 +17,32 @@ export default <Partial<Config>>{
           900: '#2b2788',
           950: '#1b174f',
         },
-        'soft-amber': {
-          50: '#f8f6f4',
-          100: '#efece5',
-          200: '#ded7ca',
-          300: '#cfc4b1',
-          400: '#b39f84',
-          500: '#a3896c',
-          600: '#967960',
-          700: '#7d6351',
-          800: '#675245',
-          900: '#54443a',
-          950: '#2c231e',
+        parchment: {
+          50: '#f9f6ed',
+          100: '#f1ead2',
+          200: '#e4d3a4',
+          300: '#d3b671',
+          400: '#c69b49',
+          500: '#e4d3a4',
+          600: '#9d6b31',
+          700: '#7e502a',
+          800: '#6a4229',
+          900: '#5b3928',
+          950: '#341d14',
         },
-
+        salomie: {
+          50: '#fef9ec',
+          100: '#faeecb',
+          200: '#f4d686',
+          300: '#f0c259',
+          400: '#ecab33',
+          500: '#e58b1b',
+          600: '#ca6915',
+          700: '#a84a15',
+          800: '#893a17',
+          900: '#713016',
+          950: '#401708',
+        },
       },
     },
   },

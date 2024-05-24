@@ -4,16 +4,17 @@
     <div class="flex flex-col justify-center items-center">
       <img
         class="p-4 w-64 h-64 transition-transform duration-500 ease-in-out transform hover:scale-105"
-        src="https://down-vn.img.susercontent.com/file/cn-11134207-7r98o-lnb8glkv1y8r43?fbclid=IwAR1tZvmG9THnLfHaI-endjNmNeK5AYw9fheg7mYVYp71kT6znSKzeIWw99g"
+        :src="imageUrl"
+        @click="navigateToProduct(product_id)"
       >
       <!-- product name -->
       <h3 class="text-lg mr-12">
-        Tủ quần áo lắp ghép
+        {{ product_name }}
       </h3>
       <!-- price -->
       <div class="w-3/4 py-2 mr-3">
         <h3 class="text-lg font-medium">
-          269.000VND
+          {{ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price) }}
         </h3>
       </div>
       <!-- Buy now and add -->
@@ -34,11 +35,17 @@
 <script setup>
 import { Icon } from '@iconify/vue'
 
-// export default {
-//   props: {
-//     product: Object,
-//   },
-// }
+defineProps({
+  product_id: String,
+  product_name: String,
+  price: Number,
+  imageUrl: String,
+})
+
+const navigateToProduct = (product_id) => {
+  console.log(product_id)
+  navigateTo(`/chi-tiet-san-pham/${product_id}`)
+}
 </script>
 
 <style>

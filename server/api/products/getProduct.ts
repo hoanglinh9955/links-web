@@ -17,12 +17,12 @@ export default defineEventHandler(async (event) => {
     const imageUrl = images.results.map(e => e.image_url)
 
     return {
-      status: true,
+      success: true,
       product: product.results[0],
       imageUrl,
     }
   }
-  catch (e: any) {
+  catch (e) {
     console.error({
       message: e.message,
     })

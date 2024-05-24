@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const items = [
-  './1.png',
-  './2.png',
-  './3.png',
+  './1.jpg',
+  './2.jpg',
+  './3.jpg',
 ]
 
 const carouselRef = ref()

@@ -11,7 +11,7 @@ export default defineNuxtConfig({
     preference: 'light',
   },
   app: {
-    pageTransition: { name: 'page', mode: 'out-in' }
+    pageTransition: { name: 'page', mode: 'out-in' },
   },
   modules: ['nitro-cloudflare-dev', '@nuxt/ui', '@nuxtjs/supabase', '@nuxt/eslint'],
 })

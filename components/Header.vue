@@ -1,7 +1,10 @@
 <template>
   <div class="flex mx-10 px-5">
     <div class="flex items-center p-3">
-      <NuxtLink class="text-3xl" to="/">
+      <NuxtLink
+        class="text-3xl"
+        to="/"
+      >
         Links
       </NuxtLink>
     </div>

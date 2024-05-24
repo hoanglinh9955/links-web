@@ -6,7 +6,10 @@
           label="Email"
           name="email"
         >
-          <UInput color="primary" v-model="form.email" />
+          <UInput
+            v-model="form.email"
+            color="primary"
+          />
         </UFormGroup>
 
         <UFormGroup
@@ -28,7 +31,7 @@
         <UDivider label="OR" />
 
         <UButton
-        class="bg-primary-200 hover:bg-primary-400"
+          class="bg-primary-200 hover:bg-primary-400"
           label="Login with Google"
           block
           @click="login"

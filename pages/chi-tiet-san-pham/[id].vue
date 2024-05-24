@@ -93,7 +93,7 @@
       Mô Tả Sản Phẩm
     </h2>
     <!-- descrition -->
-    <div class="flex flex-col w-4/5 space-y-3">
+    <div class="flex flex-col w-full space-y-3">
       <div
         v-for="(section, index) in sections"
         :key="index"
@@ -131,9 +131,8 @@ const { data } = await useFetch(`https://linkss.pages.dev/api/products/getProduc
 if (data.value.success) {
   images.value = data.value.imageUrl
 }
-console.log('🚀 ~ data:', data)
+
 const sections = data.value.product.description.split('|')
-console.log('🚀 ~ sections:', sections)
 
 const links = [{
   label: 'Trang Chủ',

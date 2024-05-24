@@ -9,12 +9,17 @@
         :ui="{ label: 'text-4xl' }"
         label="Sản Phẩm Bán Chạy"
       />
-      <div class="flex flex-col justify-center items-center pt-10">
-        <div class="flex space-x-5">
-          <CardContainer />
-          <CardContainer />
-          <CardContainer />
-          <CardContainer />
+      <div class="flex space-x-5 justify-center items-center pt-10">
+        <div
+          v-for="item in data2.productList.slice(0, 4)"
+          :key="item.product_id"
+        >
+          <Card
+            :product_id="item.product.product_id"
+            :product_name="item.product.product_name"
+            :price="item.product.price"
+            :image-url="item.imageUrl[0]"
+          />
         </div>
       </div>
     </UContainer>
@@ -193,14 +198,16 @@
 </template>
 
 <script setup>
+import Card from '~/components/ Card.vue'
 import BigCardContainer from '~/components/BigCardContainer.vue'
 import CardContainer from '~/components/CardContainer.vue'
 
 const { data: data1 } = await useFetch(`https://linkss.pages.dev/api/products/getProductsByCate`, {
   query: { category: 'Nhà Bếp' },
 })
-
-
+const { data: data2 } = await useFetch(`https://linkss.pages.dev/api/products/getProductsByCate`, {
+  query: { category: 'Phòng Ngủ' },
+})
 </script>
 
 <style>

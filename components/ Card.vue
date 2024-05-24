@@ -3,7 +3,7 @@
     <!-- div container -->
     <div class="flex flex-col">
       <img
-        class="p-4 w-64 h-64 transition-transform duration-500 ease-in-out transform hover:scale-105"
+        class="p-4 w-48 h-48 transition-transform duration-500 ease-in-out transform hover:scale-105"
         :src="imageUrl"
         @click="navigateToProduct(product_id)"
       >
@@ -48,7 +48,8 @@
 
 <script setup>
 import { Icon } from '@iconify/vue'
-
+// import { useCart } from '~/composables/useCart'
+// const { cart, addToCart, removeFromCart, clearCart } = useCart()
 const numberStar = ref(5)
 
 defineProps({
@@ -63,7 +64,3 @@ const navigateToProduct = (product_id) => {
   navigateTo(`/chi-tiet-san-pham/${product_id}`)
 }
 </script>
-
-<style>
-
-</style>

@@ -10,5 +10,8 @@ export default defineNuxtConfig({
   colorMode: {
     preference: 'light',
   },
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' }
+  },
   modules: ['nitro-cloudflare-dev', '@nuxt/ui', '@nuxtjs/supabase', '@nuxt/eslint'],
 })

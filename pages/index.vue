@@ -128,8 +128,16 @@
         label="Nhà Bếp"
       />
       <div class="flex space-x-5 justify-center items-center pt-10">
-        <div v-for="item in data1.productList" :key="item.product_id">
-          <BigCardContainer :product_id="item.product.product_id" :product_name="item.product.product_name" :price="item.product.price" :imageUrl="item.imageUrl[0]" />
+        <div
+          v-for="item in data1.productList.slice(0, 3)"
+          :key="item.product_id"
+        >
+          <BigCardContainer
+            :product_id="item.product.product_id"
+            :product_name="item.product.product_name"
+            :price="item.product.price"
+            :image-url="item.imageUrl[0]"
+          />
         </div>
       </div>
     </UContainer>
@@ -191,7 +199,6 @@ import CardContainer from '~/components/CardContainer.vue'
 const { data: data1 } = await useFetch(`https://linkss.pages.dev/api/products/getProductsByCate`, {
   query: { category: 'Nhà Bếp' },
 })
-console.log("🚀 ~ data1:", data1)
 
 
 </script>

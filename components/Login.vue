@@ -8,6 +8,7 @@
         >
           <UInput
             v-model="form.email"
+            placeholder="Links@gmail.com"
             color="primary"
           />
         </UFormGroup>
@@ -19,11 +20,12 @@
           <UInput
             v-model="form.password"
             type="password"
+            placeholder="********"
           />
         </UFormGroup>
 
         <UButton
-          label="Login"
+          label="Đăng Nhập"
           color="gray"
           block
         />
@@ -31,12 +33,12 @@
         <UDivider label="OR" />
 
         <UButton
-          class="bg-primary-200 hover:bg-primary-400"
+          class="bg-primary-300 hover:bg-primary-400"
           label="Login with Google"
           block
           @click="login"
         >
-          Login with Google <Icon
+          Đăng Nhập Với Google <Icon
             icon="tabler:brand-google-filled"
             width="1.2em"
             height="1.2em"
@@ -50,10 +52,9 @@
 <script setup>
 import { Icon } from '@iconify/vue'
 
-const form = reactive({ email: 'mail@example.com', password: 'password' })
+const form = reactive({ email: '', password: '' })
 
 const supabase = useSupabaseClient()
-const user = useSupabaseUser()
 
 const login = async () => {
   const redirectTo = `${window.location.origin}` + '/'
@@ -63,9 +64,6 @@ const login = async () => {
     provider: 'google',
     options: { redirectTo },
   })
-
-  // const { data } = await supabase.auth.getUser .from('users').select('user_id, name')
-  // console.log("🚀 ~ file: login.vue:74 ~ login ~ data:", data)
 
   if (error) {
     console.error(error)

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col space-y-6 bg-parchment-100 py-12 font-sans mt-20">
+  <div class="flex flex-col space-y-6 bg-primary-100 py-12 font-sans mt-20">
     <div class="flex justify-around ">
       <!-- col 1 -->
       <div class="flex flex-col space-y-2">
@@ -9,7 +9,7 @@
         <NuxtLink to="/san-pham">
           Sản Phẩm
         </NuxtLink>
-        <NuxtLink to="/gioi-thieu">
+        <NuxtLink to="/">
           Giới Thiệu
         </NuxtLink>
         <NuxtLink to="/lien-he">

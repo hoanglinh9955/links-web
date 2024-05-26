@@ -13,5 +13,5 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
   },
-  modules: ['nitro-cloudflare-dev', '@nuxt/ui', '@nuxtjs/supabase', '@nuxt/eslint'],
+  modules: ['nitro-cloudflare-dev', '@nuxt/ui', '@nuxtjs/supabase', '@nuxt/eslint', '@pinia/nuxt'],
 })

@@ -24,7 +24,7 @@
       </div>
     </UContainer>
     <!-- combo  -->
-    <div class="flex flex-col bg-parchment-100 w-full justify-center items-center pb-4 pt-3">
+    <div class="flex flex-col bg-primary-100 w-full justify-center items-center pb-4 pt-3">
       <div class="flex justify-between w-1/2 p-3">
         <h3 class="text-4xl font-medium">
           Combo Nhà Bếp
@@ -70,7 +70,7 @@
       />
       <div class="flex flex-col justify-between items-center w-full space-y-9">
         <!-- row 1 -->
-        <Ucontainer class="flex w-3/4 justify-around space-x-3">
+        <UContainer class="flex w-3/4 justify-around space-x-3">
           <div>
             <img
               src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lpkyjygwawkb65"
@@ -86,9 +86,9 @@
               Tiện Lợi, Tinh Tế, Nhỏ Gọn
             </h4>
           </div>
-        </Ucontainer>
+        </UContainer>
         <!-- row 2 -->
-        <Ucontainer class="flex w-3/4 justify-around space-x-3">
+        <UContainer class="flex w-3/4 justify-around space-x-3">
           <div class="flex flex-col justify-center items-center space-y-2">
             <h3 class="text-3xl">
               Nội Thất
@@ -104,9 +104,9 @@
               class="w-96 h-96"
             >
           </div>
-        </Ucontainer>
+        </UContainer>
         <!-- row 3 -->
-        <Ucontainer class="flex w-3/4 justify-around space-x-3">
+        <UContainer class="flex w-3/4 justify-around space-x-3">
           <div>
             <img
               src="https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lhwo13hh705h3f?fbclid=IwAR22rRZ1ywyIMUsgA_iahryyJF16jH8fRZpH6NpBCgHVbEGfaJXWKG8Z3hs"
@@ -122,7 +122,7 @@
               Êm Ái, Phong Cách, Dễ Chịu
             </h4>
           </div>
-        </Ucontainer>
+        </UContainer>
       </div>
     </UContainer>
     <!-- nhà bếp -->
@@ -148,7 +148,7 @@
     </UContainer>
 
     <!-- service of links -->
-    <UContainer class="flex space-x-8 bg-parchment-100 w-7/12 p-5 py-14 justify-center rounded-3xl">
+    <UContainer class="flex space-x-8 bg-primary-100 w-7/12 p-5 py-14 justify-center rounded-3xl">
       <div class="flex flex-col space-y-3">
         <div class="flex flex-col space-y-3">
           <h3 class="text-3xl">
@@ -202,10 +202,10 @@ import Card from '~/components/ Card.vue'
 import BigCardContainer from '~/components/BigCardContainer.vue'
 import CardContainer from '~/components/CardContainer.vue'
 
-const { data: data1 } = await useFetch(`https://linkss.pages.dev/api/products/getProductsByCate`, {
+const { data: data1 } =  useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
   query: { category: 'Nhà Bếp' },
 })
-const { data: data2 } = await useFetch(`https://linkss.pages.dev/api/products/getProductsByCate`, {
+const { data: data2 } =  useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
   query: { category: 'Phòng Ngủ' },
 })
 </script>

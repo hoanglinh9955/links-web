@@ -36,16 +36,9 @@
 <script setup>
 import { Icon } from '@iconify/vue'
 
-// defineProps({
-//   product: object,
-//   imageUrl: Array,
-// })
-
-const router = useRouter()
-
 const navigateToProduct = () => {
   navigateTo({
-    path: '/chi-tiet-san-pham/pro1',
+    path: '/chi-tiet-san-pham/UI12',
   })
 }
 </script>

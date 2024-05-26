@@ -2,10 +2,9 @@
   <div class="flex mx-10 px-5">
     <div class="flex items-center p-3">
       <NuxtLink
-        class="text-3xl"
         to="/"
       >
-        Links
+        <img src="../public/logo.png">
       </NuxtLink>
     </div>
     <UHorizontalNavigation
@@ -24,8 +23,27 @@
 </template>
 
 <script setup>
+import { reloadState } from '~/stores/storeModal'
+
+const reload = storeToRefs(reloadState()).reloadState
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
+const cartNum = ref('')
+// check cart in local storage
+if (typeof window !== 'undefined') {
+  const value = window.localStorage.getItem('cart-links')
+  const data = JSON.parse(value)
+  if (data != null) {
+    const num = data.length
+    cartNum.value = num.toString()
+  }
+}
+// reload when user add to cart
+watch(reload, async () => {
+  const data = JSON.parse(window.localStorage.getItem('cart-links'))
+  const num = data.length
+  cartNum.value = num.toString()
+})
 
 const logout = async () => {
   const { error } = await supabase.auth.signOut()
@@ -65,7 +83,7 @@ links.value = [
   [{
     label: 'Giỏ Hàng',
     icon: 'i-heroicons-shopping-bag',
-    badge: '1',
+    badge: cartNum.value,
     to: '/gio-hang',
   }, {
     label: 'Đăng Nhập',
@@ -95,7 +113,7 @@ watchEffect(() => {
       [{
         label: 'Giỏ Hàng',
         icon: 'i-heroicons-shopping-bag',
-        badge: '1',
+        badge: cartNum.value,
         to: '/gio-hang',
       },
       {
@@ -134,7 +152,7 @@ watchEffect(() => {
       [{
         label: 'Giỏ Hàng',
         icon: 'i-heroicons-shopping-bag',
-        badge: '1',
+        badge: cartNum.value,
         to: '/gio-hang',
       }, {
         label: 'Đăng Nhập',

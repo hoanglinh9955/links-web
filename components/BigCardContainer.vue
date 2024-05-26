@@ -3,7 +3,7 @@
     <!-- div container -->
     <div class="flex flex-col">
       <img
-        class="p-4 w-64 h-64 transition-transform duration-500 ease-in-out transform hover:scale-105"
+        class="p-4 w-64 h-64 transition-transform duration-500 ease-in-out transform hover:scale-105 cursor-pointer"
         :src="imageUrl"
         @click="navigateToProduct(product_id)"
       >
@@ -30,10 +30,9 @@
           {{ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price) }}
         </h3>
       </div>
-
       <!-- Buy now and add -->
       <div class="flex space-x-2 justify-around items-center w-full py-3">
-        <UButton class="bg-primary-200 hover:bg-primary-400 w-3/4 justify-center items-center rounded-2xl">
+        <UButton class="bg-primary-300 hover:bg-primary-400 w-3/4 justify-center items-center rounded-2xl">
           Mua Ngay
         </UButton><div class="cursor-pointer rounded-3xl justify-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
           <Icon

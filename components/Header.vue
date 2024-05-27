@@ -7,13 +7,15 @@
         <img src="../public/logo.png">
       </NuxtLink>
     </div>
-    <UHorizontalNavigation
-      :links="links"
-    >
-      <template #default="{ link }">
-        <span class="group-hover:text-primary-200 relative">{{ link.label }}</span>
-      </template>
-    </UHorizontalNavigation>
+    <ClientOnly>
+      <UHorizontalNavigation
+        :links="links"
+      >
+        <template #default="{ link }">
+          <span class="group-hover:text-primary-200 relative">{{ link.label }}</span>
+        </template>
+      </UHorizontalNavigation>
+    </ClientOnly>
   </div>
   <UModal v-model="isOpen">
     <div class="p-4">

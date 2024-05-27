@@ -1,14 +1,14 @@
 <template>
-  <div class="shadow-2xl w-auto h-auto rounded-lg p-2 bg-white">
+  <div class="shadow-2xl w-56 h-96 rounded-lg p-2 bg-white">
     <!-- div container -->
     <div class="flex flex-col">
       <img
-        class="p-4 w-48 h-48 transition-transform duration-500 ease-in-out transform hover:scale-105 cursor-pointer"
+        class="p-4 w-52 h-52 transition-transform duration-500 ease-in-out transform hover:scale-105 cursor-pointer"
         :src="imageUrl"
         @click="navigateToProduct(product_id)"
       >
       <!-- product name -->
-      <h3 class="text-lg px-5">
+      <h3 class="text-lg px-5 w-56 h-14">
         {{ product_name }}
       </h3>
       <!-- star -->
@@ -32,7 +32,7 @@
       </div>
 
       <!-- Buy now and add -->
-      <div class="flex space-x-2 justify-around items-center w-full py-3">
+      <div class="flex space-x-2 justify-around items-center w-full mb-3">
         <UButton class="bg-primary-300 hover:bg-primary-400 w-3/4 justify-center items-center rounded-2xl">
           Mua Ngay
         </UButton>
@@ -88,7 +88,7 @@ const addToCart = (product_id) => {
   }
 
   reload.value++
-  toast.add({ title: 'Add To Cart Success !', timeout: 2000 })
+  toast.add({ title: 'Thêm Vào Giỏ Hàng Thành Công !', timeout: 2000 })
 }
 
 defineProps({

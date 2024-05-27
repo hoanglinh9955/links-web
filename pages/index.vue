@@ -70,7 +70,7 @@
       />
       <div class="flex flex-col justify-between items-center w-full space-y-9">
         <!-- row 1 -->
-        <UContainer class="flex w-3/4 justify-around space-x-3">
+        <UContainer class="flex w-3/4 justify-around space-x-8">
           <div>
             <img
               src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lpkyjygwawkb65"
@@ -88,7 +88,7 @@
           </div>
         </UContainer>
         <!-- row 2 -->
-        <UContainer class="flex w-3/4 justify-around space-x-3">
+        <UContainer class="flex w-3/4 justify-around space-x-8">
           <div class="flex flex-col justify-center items-center space-y-2">
             <h3 class="text-3xl">
               Nội Thất
@@ -106,7 +106,7 @@
           </div>
         </UContainer>
         <!-- row 3 -->
-        <UContainer class="flex w-3/4 justify-around space-x-3">
+        <UContainer class="flex w-3/4 justify-around space-x-8">
           <div>
             <img
               src="https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lhwo13hh705h3f?fbclid=IwAR22rRZ1ywyIMUsgA_iahryyJF16jH8fRZpH6NpBCgHVbEGfaJXWKG8Z3hs"
@@ -178,19 +178,24 @@
         >
       </div>
     </UContainer>
-    <!-- Phòng Ngủ -->
+    <!-- Gia dụng -->
     <UContainer class="flex flex-col justify-center items-center ">
       <UDivider
         size="xs"
         :ui="{ label: 'text-4xl' }"
-        label="Phòng Ngủ"
+        label="Gia Dụng"
       />
-      <div class="flex flex-col justify-center items-center pt-10">
-        <div class="flex space-x-5">
-          <CardContainer />
-          <CardContainer />
-          <CardContainer />
-          <CardContainer />
+      <div class="flex space-x-5 justify-center items-center pt-10">
+        <div
+          v-for="item in data3.productList.slice(0, 4)"
+          :key="item.product_id"
+        >
+          <Card
+            :product_id="item.product.product_id"
+            :product_name="item.product.product_name"
+            :price="item.product.price"
+            :image-url="item.imageUrl[0]"
+          />
         </div>
       </div>
     </UContainer>
@@ -202,11 +207,14 @@ import Card from '~/components/ Card.vue'
 import BigCardContainer from '~/components/BigCardContainer.vue'
 import CardContainer from '~/components/CardContainer.vue'
 
-const { data: data1 } =  useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
+const { data: data1 } = useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
   query: { category: 'Nhà Bếp' },
 })
-const { data: data2 } =  useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
+const { data: data2 } = useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
   query: { category: 'Phòng Ngủ' },
+})
+const { data: data3 } = useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
+  query: { category: 'Gia Dụng' },
 })
 </script>
 

@@ -1,112 +1,112 @@
 <template>
-  <div class="flex flex-col space-y-28">
-    <!-- san pham ban chay div -->
-    <UContainer class="flex flex-col justify-center items-center pt-16">
+  <div class="flex flex-col space-y-20">
+    <!-- nhà bếp -->
+    <UContainer class="flex flex-col justify-center items-center mt-24">
       <UDivider
         size="xs"
         :ui="{ label: 'text-4xl' }"
-        label="Sản Phẩm Bán Chạy"
+        label="Nhà Bếp"
       />
-      <div class="flex flex-col justify-center items-center pt-10">
-        <div class="flex space-x-5">
-          <CardContainer />
-          <CardContainer />
-          <CardContainer />
-          <CardContainer />
-        </div>
-        <NuxtLink
-          class="pt-5 w-full flex justify-end mr-8 items-center font-medium"
-          to="/san-pham"
+      <div class="flex space-x-5 justify-center items-center pt-10">
+        <div
+          v-for="item in data3.productList.slice(0, 4)"
+          :key="item.product_id"
         >
-          Xem Thêm  <Icon
-            class="m-1"
-            name="i-heroicons-chevron-double-right"
+          <Card
+            :product_id="item.product.product_id"
+            :product_name="item.product.product_name"
+            :price="item.product.price"
+            :image-url="item.imageUrl[0]"
           />
-        </NuxtLink>
+        </div>
       </div>
+      <NuxtLink
+        class="pt-5 w-full flex justify-end mr-8 items-center font-medium transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+        to="/danh-muc/Nhà Bếp"
+      >
+        Xem Thêm  <Icon
+          class="m-1"
+          name="i-heroicons-chevron-double-right"
+        />
+      </NuxtLink>
     </UContainer>
-    <!-- san pham ban chay div -->
-    <UContainer class="flex flex-col justify-center items-center">
+    <!-- Phong ngu -->
+    <UContainer class="flex flex-col justify-center items-center ">
       <UDivider
         size="xs"
         :ui="{ label: 'text-4xl' }"
-        label="Sản Phẩm Bán Chạy"
+        label="Phòng Ngủ"
       />
-      <div class="flex flex-col justify-center items-center pt-10">
-        <div class="flex space-x-5">
-          <CardContainer />
-          <CardContainer />
-          <CardContainer />
-          <CardContainer />
-        </div>
-        <NuxtLink
-          class="pt-5 w-full flex justify-end mr-8 items-center font-medium"
-          to="/san-pham"
+      <div class="flex space-x-5 justify-center items-center pt-10">
+        <div
+          v-for="item in data2.productList.slice(0, 4)"
+          :key="item.product_id"
         >
-          Xem Thêm  <Icon
-            class="m-1"
-            name="i-heroicons-chevron-double-right"
+          <Card
+            :product_id="item.product.product_id"
+            :product_name="item.product.product_name"
+            :price="item.product.price"
+            :image-url="item.imageUrl[0]"
           />
-        </NuxtLink>
+        </div>
       </div>
+      <NuxtLink
+        class="pt-5 w-full flex justify-end mr-8 items-center font-medium transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+        to="/danh-muc/Phòng Ngủ"
+      >
+        Xem Thêm  <Icon
+          class="m-1"
+          name="i-heroicons-chevron-double-right"
+        />
+      </NuxtLink>
     </UContainer>
-
-    <!-- san pham ban chay div -->
-    <UContainer class="flex flex-col justify-center items-center">
+    <!-- Gia dụng -->
+    <UContainer class="flex flex-col justify-center items-center mt-24">
       <UDivider
         size="xs"
         :ui="{ label: 'text-4xl' }"
-        label="Sản Phẩm Bán Chạy"
+        label="Gia Dụng"
       />
-      <div class="flex flex-col justify-center items-center pt-10">
-        <div class="flex space-x-5">
-          <CardContainer />
-          <CardContainer />
-          <CardContainer />
-          <CardContainer />
-        </div>
-        <NuxtLink
-          class="pt-5 w-full flex justify-end mr-8 items-center font-medium"
-          to="/san-pham"
+      <div class="flex space-x-5 justify-center items-center pt-10">
+        <div
+          v-for="item in data3.productList.slice(0, 4)"
+          :key="item.product_id"
         >
-          Xem Thêm  <Icon
-            class="m-1"
-            name="i-heroicons-chevron-double-right"
+          <Card
+            :product_id="item.product.product_id"
+            :product_name="item.product.product_name"
+            :price="item.product.price"
+            :image-url="item.imageUrl[0]"
           />
-        </NuxtLink>
-      </div>
-    </UContainer>
-
-    <!-- san pham ban chay div -->
-    <UContainer class="flex flex-col justify-center items-center pb-8">
-      <UDivider
-        size="xs"
-        :ui="{ label: 'text-4xl' }"
-        label="Sản Phẩm Bán Chạy"
-      />
-      <div class="flex flex-col justify-center items-center pt-10">
-        <div class="flex space-x-5">
-          <CardContainer />
-          <CardContainer />
-          <CardContainer />
-          <CardContainer />
         </div>
-        <NuxtLink
-          class="pt-5 w-full flex justify-end mr-8 items-center font-medium"
-          to="/san-pham"
-        >
-          Xem Thêm  <Icon
-            class="m-1"
-            name="i-heroicons-chevron-double-right"
-          />
-        </NuxtLink>
       </div>
+      <NuxtLink
+        class="pt-5 w-full flex justify-end mr-8 items-center font-medium transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+        to="/danh-muc/Gia Dụng"
+      >
+        Xem Thêm  <Icon
+          class="m-1"
+          name="i-heroicons-chevron-double-right"
+        />
+      </NuxtLink>
     </UContainer>
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
+import Card from '~/components/ Card.vue'
+import BigCardContainer from '~/components/BigCardContainer.vue'
+import CardContainer from '~/components/CardContainer.vue'
 
+const { data: data1 } = useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
+  query: { category: 'Nhà Bếp' },
+})
+const { data: data2 } = useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
+  query: { category: 'Phòng Ngủ' },
+})
+const { data: data3 } = useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
+  query: { category: 'Gia Dụng' },
+})
 </script>
 
 <style>

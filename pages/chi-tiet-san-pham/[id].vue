@@ -64,7 +64,7 @@
               -
             </div>
             <div class="border-r-2 border-l-2 border-black w-16 text-center">
-              {{ quantity }}
+              {{ checkedQuantity }}
             </div>
             <div
               class="flex-1 text-center cursor-pointer"
@@ -85,8 +85,16 @@
             size="lg"
             label="Thêm Vào Giỏ Hàng"
             class="w-44 rounded-3xl justify-center items-center"
+            :class="{
+              'transition ease-in-out delay-150 bg-red-600 -translate-y-5 scale-110 hover:bg-orange-500 duration-300': isAddToCart,
+              'transition ease-in-out delay-150 -translate-y-0 duration-300': !isAddToCart, // Return to original position when isAddToCart is false
+            }"
+            @click="addToCart"
           />
         </div>
+        <h1 v-if="quantityInCart > 0">
+          Bạn Đang Có {{ quantityInCart }} Trong Giỏ Hàng
+        </h1>
       </div>
     </div>
     <h2 class="text-3xl p-3">
@@ -109,15 +117,41 @@
 
 <script setup>
 import { Icon } from '@iconify/vue'
+import { reloadState } from '~/stores/storeModal'
 
+const reload = storeToRefs(reloadState()).reloadState
 const route = useRoute()
-
+const toast = useToast()
 const images = ref([])
 const numberStar = ref(5)
 const quantity = ref(1)
+const quantityInCart = ref(0)
+const isAddToCart = ref(false)
+
+const updateQuantityInCart = () => {
+  if (typeof window !== 'undefined') {
+    const value = window.localStorage.getItem('cart-links')
+    const data = JSON.parse(value)
+    if (data != null) {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].product_id == route.params.id) {
+          quantityInCart.value = data[i].quantity
+        }
+      }
+    }
+  }
+}
+
 const changeQuantity = (type) => {
   if (type === 'increase') {
-    quantity.value += 1
+    if (quantity.value < data.value.product.stock) {
+      quantity.value += 1
+    }
+    else {
+      // Set quantity to available stock if it exceeds
+      quantity.value = data.value.product.stock
+      toast.add({ title: `Rất tiếc, ${data.value.product.product_name} không còn đủ hàng (chỉ còn ${data.value.product.stock} sản phẩm)`, timeout: 9000 })
+    }
   }
   else if (type === 'decrease' && quantity.value > 1) {
     quantity.value -= 1
@@ -130,6 +164,79 @@ const { data } = await useFetch(`https://linkss.pages.dev/api/products/getProduc
 })
 if (data.value.success) {
   images.value = data.value.imageUrl
+  // get quantity in cart
+  updateQuantityInCart()
+}
+
+const checkedQuantity = computed(() => {
+  let checkedValue = quantityInCart.value
+  if (checkedValue > data.value.product.stock) {
+    checkedValue = data.value.product.stock
+    if (typeof window !== 'undefined') {
+      const value = window.localStorage.getItem('cart-links')
+      const data = JSON.parse(value)
+      if (data != null) {
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].product_id === route.params.id) {
+            data[i].quantity = checkedValue
+          }
+        }
+        window.localStorage.setItem('cart-links', JSON.stringify(data))
+      }
+    }
+  }
+  return quantity.value
+})
+
+const addToCart = () => {
+  if (typeof window !== 'undefined') {
+    // Get the cart links from local storage
+    const cartLinks = JSON.parse(window.localStorage.getItem('cart-links')) || []
+
+    // Check if the product already exists in the cart
+    const existingProductIndex = cartLinks.findIndex(item => item.product_id === route.params.id)
+
+    if (existingProductIndex !== -1) {
+      // Product already exists in the cart, update its quantity
+      const existingProduct = cartLinks[existingProductIndex]
+      const totalQuantity = existingProduct.quantity + quantity.value
+
+      if (totalQuantity <= data.value.product.stock) {
+        existingProduct.quantity = totalQuantity
+        isAddToCart.value = true
+        toast.add({ title: `Bạn Đã Thêm ${quantity.value} ${data.value.product.product_name} Vào Giỏ Hàng, Hiện Có ${totalQuantity} Trong Giỏ Hàng`, timeout: 9000 })
+      }
+      else {
+        if (existingProduct.quantity < data.value.product.stock) {
+          isAddToCart.value = true
+        }
+        existingProduct.quantity = data.value.product.stock
+        toast.add({ title: `Rất Tiếc, ${data.value.product.product_name} Không Còn Đủ Hàng (chỉ còn ${data.value.product.stock} sản phẩm)`, timeout: 9000 })
+      }
+    }
+    else {
+      // Product does not exist in the cart, add it
+      if (quantity.value <= data.value.product.stock) {
+        cartLinks.push({ product_id: route.params.id, quantity: quantity.value })
+        isAddToCart.value = true
+        reload.value++
+        toast.add({ title: `Bạn Đã Thêm ${data.value.product.product_name} ${quantity.value} Sản Phẩm Vào Giỏ Hàng`, timeout: 9000 })
+      }
+      else {
+        toast.add({ title: `Rất tiếc, ${data.value.product.product_name} Không Còn Đủ Hàng (chỉ còn ${data.value.product.stock} sản phẩm)`, timeout: 9000 })
+      }
+    }
+
+    // Update the cart-links in local storage
+    window.localStorage.setItem('cart-links', JSON.stringify(cartLinks))
+    // update quantity after add to cart
+    updateQuantityInCart()
+    setTimeout(() => {
+      console.log(isAddToCart.value)
+      isAddToCart.value = false
+      console.log(isAddToCart.value)
+    }, 500)
+  }
 }
 
 const sections = data.value.product.description.split('|')
@@ -158,6 +265,6 @@ onMounted(() => {
     }
 
     carouselRef.value.next()
-  }, 7000)
+  }, 9000)
 })
 </script>

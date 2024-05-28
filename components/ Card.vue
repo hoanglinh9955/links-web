@@ -88,7 +88,7 @@ const addToCart = (product_id) => {
   }
 
   reload.value++
-  toast.add({ title: 'Thêm Vào Giỏ Hàng Thành Công !', timeout: 2000 })
+  toast.add({ title: 'Thêm Vào Giỏ Hàng Thành Công !', timeout: 3000 })
 }
 
 defineProps({

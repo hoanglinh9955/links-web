@@ -5,15 +5,15 @@
     </h1>
 
     <div v-if="isHaveProduct">
-        <div v-if="status">
-          <UProgress animation="carousel" />
-        </div>
+      <div v-if="status">
+        <UProgress animation="carousel" />
+      </div>
       <ClientOnly>
         <h4 class="text-center">
           Bạn Có {{ cartNum }} Sản Phẩm Trong Giỏ Hàng
         </h4>
         <!-- cart -->
-        
+
         <div class="w-full flex flex-col space-y-5 pt-12">
           <div
             v-for="(product, index) in displayList.displayList"
@@ -57,20 +57,26 @@
                   color="white"
                   variant="ghost"
                   size="lg"
-                  @click="removeFromCart(product.product.product_id)"
                   class="transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-125 duration-300"
+                  @click="removeFromCart(product.product.product_id)"
                 />
               </div>
             </div>
           </div>
-          <UDivider size="sm" class="py-4"/>
+          <UDivider
+            size="sm"
+            class="py-4"
+          />
           <div
             v-if="totalPrice != 0"
             class="text-end text-xl"
           >
             Tổng Tiền: <span class="font-medium"> {{ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalPrice) }} </span>
           </div>
-          <UDivider size="sm" class="py-4"/>
+          <UDivider
+            size="sm"
+            class="py-4"
+          />
           <div
             v-if="totalPrice != 0"
             class="text-end pt-5"
@@ -83,9 +89,8 @@
             >
               Thanh Toán Ngay
             </UButton>
+          </div>
         </div>
-        </div>
-
       </ClientOnly>
     </div>
     <div

@@ -43,13 +43,13 @@
       <div class="flex flex-col space-y-2">
         <h3>Liên Hệ Với Chúng Tôi</h3>
         <div class="flex">
-          <NuxtLink to="/">
+          <NuxtLink to="https://www.facebook.com/profile.php?id=61559820830880&mibextid=kFxxJD">
             <Icon
               icon="tabler:brand-facebook"
               style="font-size: 30px;"
             />
           </NuxtLink>
-          <NuxtLink to="/">
+          <NuxtLink to="https://www.instagram.com/links_0309">
             <Icon
               icon="tabler:brand-instagram"
               style="font-size: 30px;"

@@ -1,6 +1,9 @@
 <template>
   <div class="flex flex-col space-y-20">
     <!-- nhà bếp -->
+    <!-- <div class="w-full" v-if="pending1 | pending2 | pending3">
+      <UProgress animation="carousel" />
+    </div> -->
     <UContainer class="flex flex-col justify-center items-center mt-24">
       <UDivider
         size="xs"
@@ -98,13 +101,13 @@ import Card from '~/components/ Card.vue'
 import BigCardContainer from '~/components/BigCardContainer.vue'
 import CardContainer from '~/components/CardContainer.vue'
 
-const { data: data1 } = useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
+const { data: data1, pending: pending1 } =  useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
   query: { category: 'Nhà Bếp' },
 })
-const { data: data2 } = useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
+const { data: data2, pending: pending2 } =  useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
   query: { category: 'Phòng Ngủ' },
 })
-const { data: data3 } = useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
+const { data: data3, pending: pending3  } =  useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
   query: { category: 'Gia Dụng' },
 })
 </script>

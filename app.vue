@@ -1,11 +1,19 @@
 <template>
-  <Header />
+  <Header v-if="!isAdmin" />
   <div>
     <NuxtPage />
   </div>
-  <Footer />
+  <Footer v-if="!isAdmin" />
   <UNotifications icon="i-heroicons-check-circle" />
 </template>
+
+<script setup>
+const route = useRoute()
+
+const isAdmin = computed(() => {
+  return route.path.includes('/admin')
+})
+</script>
 
 <style>
 .page-enter-active,

@@ -16,21 +16,23 @@
         </template>
       </UHorizontalNavigation>
     </ClientOnly>
+    <UModal v-model="isOpen">
+      <div class="p-4">
+        <Login />
+      </div>
+    </UModal>
   </div>
-  <UModal v-model="isOpen">
-    <div class="p-4">
-      <Login />
-    </div>
-  </UModal>
+  
 </template>
 
 <script setup>
 import { reloadState } from '~/stores/storeModal'
-
+const route = useRoute()
 const reload = storeToRefs(reloadState()).reloadState
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 const cartNum = ref('')
+
 // check cart in local storage
 if (typeof window !== 'undefined') {
   const value = window.localStorage.getItem('cart-links')
@@ -55,7 +57,7 @@ const logout = async () => {
     return
   }
 
-  await navigateTo('/')
+  await navigateTo(route.fullPath)
 }
 
 const name = computed(

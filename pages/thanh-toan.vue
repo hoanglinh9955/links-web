@@ -1,5 +1,4 @@
 <template>
-  
   <UContainer class="flex">
     <div class="w-3/5 h-auto">
       <UBreadcrumb
@@ -14,7 +13,9 @@
         @submit="onSubmit"
         @error="onError"
       >
-        <h3 class="py-5 text-2xl font-medium">Thông Tin Giao Hàng</h3>
+        <h3 class="py-5 text-2xl font-medium">
+          Thông Tin Giao Hàng
+        </h3>
         <UFormGroup
           class="w-4/5"
           name="user_name"
@@ -129,8 +130,13 @@
             placeholder="Chọn phương thức thanh toán"
           />
         </UFormGroup>
-        <UButton class="w-4/5" size="lg" block type="submit">
-          Thanh Toán
+        <UButton
+          class="w-4/5"
+          size="lg"
+          block
+          type="submit"
+        >
+          Đặt Hàng
         </UButton>
       </UForm>
     </div>
@@ -145,29 +151,59 @@
             :key="index"
             class="flex w-full justify-between"
           >
-          <UChip :text='product.quantity' size="2xl">
+            <UChip
+              :text="product.quantity"
+              size="2xl"
+            >
               <img
                 :src="product.imageUrl[0]"
                 alt="product"
                 class="w-20 h-20 rounded-lg"
-              />
+              >
             </UChip>
             <h2> {{ product.product.product_name }} </h2>
-            <h2 class="font-medium"> {{ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format( product.quantity  * product.product.price)}} </h2>
+            <h2 class="font-medium">
+              {{ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.quantity * product.product.price) }}
+            </h2>
           </div>
-          
         </div>
-        <h3 class="text-2xl pt-8">
-          Thành Tiền: <span class="font-medium"> {{ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalPrice) }}</span>
+        <h3 :class="['text-2xl pt-8', totalPrice > 400000 ? 'line-through': '' ]">
+          Phí Ship: <span class="font-medium"> {{ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(25000) }}</span>
+        </h3>
+        <h3 class="text-2xl pt-4">
+          Thành Tiền: <span class="font-medium"> {{ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(finalPrice) }}</span>
         </h3>
       </UContainer>
     </div>
-    <UModal v-model="qrState" :prevent-close="preventClose" @close="handleClose">
-      <div class="p-4">
+    <UModal
+      v-model="qrState"
+      :prevent-close="preventClose"
+      @close="handleClose"
+    >
+      <div class="flex flex-col space-y-2 items-center justify-center p-4">
+        <h2 class="text-xl">
+          Quét Mã QR Để Thanh Toán
+        </h2>
         <QrCode />
-        <div class="flex flex-col justify-center items-center space-y-3" v-if="qrState && displayTimer">
-          <UProgress size="lg" class="w-3/4" :value="timer" :max="60" /> 
-          <h2 class="text-xl"> Thời Gian Còn Lại {{ timer }} Giây </h2> 
+        <h2 class="text-xl">
+          Mã Đơn Hàng : {{ description }}
+        </h2>
+        <h2 class="text-xl">
+          Tổng Tiền : <span class="text-red-600"> {{ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalAmount) }} </span>
+        </h2>
+        <div
+          v-if="qrState && displayTimer"
+          class="flex flex-col justify-center items-center space-y-3 w-full"
+        >
+          <UProgress
+            size="lg"
+            class="w-3/4"
+            :value="timer"
+            :max="120"
+          />
+          <h2 class="text-xl">
+            Thời Gian Còn Lại {{ timer }} Giây
+          </h2>
         </div>
       </div>
     </UModal>
@@ -177,11 +213,10 @@
       </div>
     </UModal> -->
   </UContainer>
-  
 </template>
 
 <script setup>
-import QrCode from '~/components/qr-code.vue';
+import QrCode from '~/components/qr-code.vue'
 import { reloadState } from '~/stores/storeModal'
 
 const links = [{
@@ -192,16 +227,36 @@ const links = [{
   label: 'Thông Tin Giao Hàng',
   icon: 'i-heroicons-map-pin',
 }]
+
+const toast = useToast()
 const description = storeToRefs(reloadState()).description
 const totalAmount = storeToRefs(reloadState()).totalAmountGlobal
+const reload = storeToRefs(reloadState()).reloadState
 const totalRevenue = ref(0)
 const qrState = ref(false)
-const preventClose = ref(false);
-const displayTimer = ref(false);
-const isOpen = ref(false);
-const timer = ref(0);
-let intervalId;
+const preventClose = ref(false)
+const displayTimer = ref(false)
+const isOpen = ref(false)
+const timer = ref(0)
+let intervalId
+const status = ref(false)
+const cartNum = ref(0)
+const productList = ref([])
+const displayList = ref([])
+const totalPrice = ref(0)
+const totalAndShip = ref(0)
 
+const finalPrice = computed(() => {
+  if(totalPrice.value > 400000) {
+    totalAndShip.value = totalPrice.value
+    return totalAndShip.value
+  }
+  else if(totalPrice.value < 400000) {
+    totalAndShip.value = totalPrice.value + 25000
+    return totalAndShip.value
+  }
+})
+const order_id = ref('')
 const dataList = ref([])
 const cities = ref([])
 const districts = ref([])
@@ -217,6 +272,10 @@ const address = ref('')
 const user_id = ref('')
 const paymentMethod = ref('')
 const methodList = ['Thanh Toán Khi Nhận Hàng', 'Chuyển Khoản Ngân Hàng']
+
+
+
+
 const validate = () => {
   const errors = []
   if (!email.value) errors.push({ path: 'email', message: 'Required' })
@@ -233,35 +292,52 @@ const validate = () => {
 async function onSubmit(event) {
   // Do something with data
   console.log(event.data)
-  if(paymentMethod.value == 'Chuyển Khoản Ngân Hàng'){
-    description.value = 'DON HANG SO 1'
-    totalAmount.value = totalPrice.value
+  if (paymentMethod.value == 'Chuyển Khoản Ngân Hàng') {
+    order_id.value = 'ORDER' + Date.now().toString()
+    description.value = order_id.value
+    totalAmount.value = totalAndShip.value
     openModal()
+  }else{
+    order_id.value = 'ORDER' + Date.now().toString()
+    addOrder()
+    clearCart();
+    reload.value++
+    toast.add({ title: 'Order Thành Công !', timeout: 5000 })
+    navigateTo(`/lich-su-mua-hang/${user_id.value}`)
+  
   }
 }
 
-const handleClose = () => {
+const handleClose = async () => {
   addOrder()
+  clearCart();
+  reload.value++
+  toast.add({ title: 'Order Thành Công !', timeout: 5000 })
+  navigateTo(`/lich-su-mua-hang/${user_id.value}`)
+}
+
+const clearCart = () => {
+  window.localStorage.setItem('cart-links', JSON.stringify([])); // Set 'cart-links' to an empty array
 };
 
 const addOrder = async () => {
-  const now = new Date();
-  const date = now.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
-  const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+  const now = new Date()
+  const date = now.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
+  const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
 
   const { data } = await useFetch(`https://linkss.pages.dev/api/orders/addOrder`, {
     method: 'POST',
     body: {
       order: {
-        order_id: 'ORDER-' + Date.now().toString(),
+        order_id: order_id.value,
         user_id: user_id.value,
         user_name: user_name.value,
         phone_number: phone_number.value,
         email: email.value,
-        total: totalPrice.value,
+        total: totalAndShip.value,
         method: paymentMethod.value,
         address: address.value + ', ' + selectedWard.value + ', ' + selectedDistrict.value + ', ' + selectedCity.value,
-        status : "Đang Xử Lý",
+        status: 'Đang Xử Lý',
         date: date,
         time: time,
         revenue: totalPrice.value - totalRevenue.value,
@@ -273,35 +349,40 @@ const addOrder = async () => {
 }
 
 const startTimer = () => {
-  intervalId = setInterval(() => {
+  intervalId = setInterval( async() => {
     if (timer.value > 0) {
-      timer.value--;
-      if (timer.value < 30) {
-        qrState.value = false;
-        clearInterval(intervalId);
-        displayTimer.value = false;
+      timer.value--
+      if (timer.value < 60) {
+        qrState.value = false
+        clearInterval(intervalId)
+        displayTimer.value = false
+        addOrder();
+        clearCart();
+        reload.value++
+        toast.add({ title: 'Order Thành Công !', timeout: 5000 })
+        navigateTo(`/lich-su-mua-hang/${user_id.value}`)
       }
-    } else {
-      clearInterval(intervalId);
-      displayTimer.value = false;
     }
-  }, 1000);
-};
-
+    else {
+      clearInterval(intervalId)
+      displayTimer.value = false
+    }
+  }, 1000)
+}
 
 const openModal = () => {
-  preventClose.value = true;
-  qrState.value = true;
+  preventClose.value = true
+  qrState.value = true
   setTimeout(() => {
-    timer.value = 60; // Reset timer to initial value
-    startTimer();
-    displayTimer.value = true;
-    }, 2000); // 2 seconds
+    timer.value = 120 // Reset timer to initial value
+    startTimer()
+    displayTimer.value = true
+  }, 500) // 2 seconds
 
   setTimeout(() => {
-    preventClose.value = false;
-  }, 12000); // 15 seconds
-};
+    preventClose.value = false
+  }, 12000) // 15 seconds
+}
 
 async function onError(event) {
   const element = document.getElementById(event.errors[0].id)
@@ -348,14 +429,6 @@ const getListWard = (districtName) => {
   })
 }
 
-// gio hang
-
-const status = ref(false)
-const reload = storeToRefs(reloadState()).reloadState
-const cartNum = ref(0)
-const productList = ref([])
-const displayList = ref([])
-const totalPrice = ref(0)
 
 // // check cart in local storage
 if (typeof window !== 'undefined') {
@@ -395,7 +468,7 @@ setTimeout(async () => {
       // If the current quantity exceeds stock, set it to the maximum available stock
       if (currentQuantity > maxStock) {
         displayList.value.displayList[i].quantity = maxStock
-        toast.add({ title: `Rất tiếc, ${product.product_name} không còn đủ hàng (chỉ còn ${maxStock} sản phẩm)`, timeout: 3000 })
+        toast.add({ title: `Rất tiếc, ${product.product_name} không còn đủ hàng (chỉ còn ${maxStock} sản phẩm)`, timeout: 5000 })
       }
     }
 
@@ -419,7 +492,7 @@ const route = useRoute()
 const login = async () => {
   // const redirectTo = `${window.location.origin} ${query.redirectTo}`;
   const redirectTo = `${window.location.origin}` + route.fullPath
-  
+
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: { redirectTo },
@@ -430,13 +503,12 @@ const login = async () => {
   }
 }
 
-
 onMounted(() => {
-  const user = useSupabaseUser();
-  if(user.value == null){
+  const user = useSupabaseUser()
+  if (user.value == null) {
     login()
   }
-  if(user.value != null){
+  if (user.value != null) {
     user_id.value = user.value.id
   }
   getCityList()

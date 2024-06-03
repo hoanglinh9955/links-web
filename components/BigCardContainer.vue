@@ -32,9 +32,10 @@
       </div>
       <!-- Buy now and add -->
       <div class="flex space-x-2 justify-around items-center w-full py-3">
-        <UButton class="bg-primary-300 hover:bg-primary-400 w-3/4 justify-center items-center rounded-2xl">
+        <UButton @click="goToMuaNgay(product_id)" class="bg-primary-300 hover:bg-primary-400 w-3/4 justify-center items-center rounded-2xl">
           Mua Ngay
-        </UButton><div
+        </UButton>
+        <div
           class="cursor-pointer rounded-3xl justify-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
           @click="addToCart(product_id)"
         >
@@ -56,6 +57,10 @@ const toast = useToast()
 const numberStar = ref(5)
 const reload = storeToRefs(reloadState()).reloadState
 const status = ref(false)
+
+const goToMuaNgay = (product_id) => {
+  navigateTo(`/mua-ngay/${product_id}`)
+}
 
 const addToCart = (product_id) => {
   const item = {

@@ -21,18 +21,27 @@
         <Login />
       </div>
     </UModal>
+    <UModal v-model="isSearch">
+      <div class="p-4">
+        <UInput v-model="searchValue" icon="i-heroicons-magnifying-glass-20-solid" placeholder="Nhập Tên Sản Phẩm Để Tìm Kiếm" @keyup.enter="goToSearch" />
+      </div>
+    </UModal>
   </div>
-  
 </template>
 
 <script setup>
 import { reloadState } from '~/stores/storeModal'
+
 const route = useRoute()
 const reload = storeToRefs(reloadState()).reloadState
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 const cartNum = ref('')
-
+const searchValue = ref('');
+const goToSearch = () => {
+  isSearch.value = false
+  navigateTo(`/tim-kiem/${searchValue.value}`)
+}
 // check cart in local storage
 if (typeof window !== 'undefined') {
   const value = window.localStorage.getItem('cart-links')
@@ -68,6 +77,7 @@ const profile = computed(
 )
 
 const isOpen = ref(false)
+const isSearch = ref(false)
 const links = ref()
 
 links.value = [
@@ -83,6 +93,12 @@ links.value = [
     label: 'Liên Hệ',
     // icon: 'i-heroicons-user-group',
     to: '/lien-he',
+  }, {
+    label: '',
+    icon: 'i-heroicons-magnifying-glass',
+    click: () => {
+          isSearch.value = true
+        },
   }],
   [{
     label: 'Giỏ Hàng',
@@ -113,7 +129,13 @@ watchEffect(() => {
         label: 'Liên Hệ',
         // icon: 'i-heroicons-user-group',
         to: '/lien-he',
-      }],
+      }, {
+    label: '',
+    icon: 'i-heroicons-magnifying-glass',
+    click: () => {
+          isSearch.value = true
+        },
+  }],
       [{
         label: 'Giỏ Hàng',
         icon: 'i-heroicons-shopping-bag',
@@ -125,6 +147,7 @@ watchEffect(() => {
         avatar: {
           src: profile,
         },
+        to: `/lich-su-mua-hang/${user.value.id}`,
       }, {
         label: '',
         icon: 'i-heroicons-arrow-right-start-on-rectangle',
@@ -152,7 +175,13 @@ watchEffect(() => {
         label: 'Liên Hệ',
         // icon: 'i-heroicons-user-group',
         to: '/lien-he',
-      }],
+      }, {
+    label: '',
+    icon: 'i-heroicons-magnifying-glass',
+    click: () => {
+          isSearch.value = true
+        },
+  }],
       [{
         label: 'Giỏ Hàng',
         icon: 'i-heroicons-shopping-bag',

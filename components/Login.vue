@@ -52,6 +52,7 @@
 
 <script setup>
 import { Icon } from '@iconify/vue'
+
 const route = useRoute()
 const form = reactive({ email: '', password: '' })
 
@@ -60,7 +61,7 @@ console.log(route.fullPath)
 const login = async () => {
   // const redirectTo = `${window.location.origin} ${query.redirectTo}`;
   const redirectTo = `${window.location.origin}` + route.fullPath
-  
+
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: { redirectTo },

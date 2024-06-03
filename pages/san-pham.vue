@@ -101,13 +101,13 @@ import Card from '~/components/ Card.vue'
 import BigCardContainer from '~/components/BigCardContainer.vue'
 import CardContainer from '~/components/CardContainer.vue'
 
-const { data: data1, pending: pending1 } =  useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
+const { data: data1, pending: pending1 } = useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
   query: { category: 'Nhà Bếp' },
 })
-const { data: data2, pending: pending2 } =  useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
+const { data: data2, pending: pending2 } = useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
   query: { category: 'Phòng Ngủ' },
 })
-const { data: data3, pending: pending3  } =  useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
+const { data: data3, pending: pending3 } = useFetch(`https://linkss.pages.dev/api/products/getProductsByCate4`, {
   query: { category: 'Gia Dụng' },
 })
 </script>

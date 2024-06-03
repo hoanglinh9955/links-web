@@ -33,7 +33,8 @@
 
       <!-- Buy now and add -->
       <div class="flex space-x-2 justify-around items-center w-full mb-3">
-        <UButton class="bg-primary-300 hover:bg-primary-400 w-3/4 justify-center items-center rounded-2xl">
+     
+        <UButton @click="goToMuaNgay(product_id)" class="bg-primary-300 hover:bg-primary-400 w-3/4 justify-center items-center rounded-2xl">
           Mua Ngay
         </UButton>
         <div
@@ -59,6 +60,9 @@ const numberStar = ref(5)
 const reload = storeToRefs(reloadState()).reloadState
 const status = ref(false)
 
+const goToMuaNgay = (product_id) => {
+  navigateTo(`/mua-ngay/${product_id}`)
+}
 const addToCart = (product_id) => {
   const item = {
     product_id: product_id,

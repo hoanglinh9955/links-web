@@ -24,7 +24,7 @@
       </div>
     </UContainer>
     <!-- combo  -->
-    <div class="flex flex-col bg-primary-100 w-full justify-center items-center pb-4 pt-3">
+    <!-- <div class="flex flex-col bg-primary-100 w-full justify-center items-center pb-4 pt-3">
       <div class="flex justify-between w-1/2 p-3">
         <h3 class="text-4xl font-medium">
           Combo Nhà Bếp
@@ -43,7 +43,7 @@
           </h4>
         </div>
       </div>
-      <!-- div san pham  -->
+
       <UContainer class="flex justify-center space-x-5 py-5 ">
         <CardContainer />
         <CardContainer />
@@ -51,7 +51,7 @@
         <CardContainer />
       </UContainer>
 
-      <!-- div button mua ngay -->
+
       <div class="flex justify-end w-1/2 space-x-8 items-center py-2">
         <UButton class=" bg-primary-400 hover:bg-primary-600 w-40 rounded-3xl justify-center transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300">
           Mua Ngay
@@ -60,8 +60,8 @@
           Đọc Thêm <Icon name="i-heroicons-chevron-double-right" />
         </NuxtLink>
       </div>
-    </div>
-    <!-- bo suu tap div  -->
+    </div> -->
+
     <UContainer class="flex flex-col justify-center items-center w-full space-y-10">
       <UDivider
         size="xs"
@@ -69,7 +69,7 @@
         label="Bộ Sưu Tập"
       />
       <div class="flex flex-col justify-between items-center w-full space-y-9">
-        <!-- row 1 -->
+      
         <UContainer class="flex w-3/4 justify-around space-x-8">
           <div>
             <img
@@ -87,7 +87,7 @@
             </h4>
           </div>
         </UContainer>
-        <!-- row 2 -->
+      
         <UContainer class="flex w-3/4 justify-around space-x-8">
           <div class="flex flex-col justify-center items-center space-y-2">
             <h3 class="text-3xl">
@@ -105,7 +105,7 @@
             >
           </div>
         </UContainer>
-        <!-- row 3 -->
+     
         <UContainer class="flex w-3/4 justify-around space-x-8">
           <div>
             <img

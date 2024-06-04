@@ -167,7 +167,7 @@
             </h2>
           </div>
         </div>
-        <h3 :class="['text-2xl pt-8', totalPrice > 400000 ? 'line-through': '' ]">
+        <h3 :class="['text-2xl pt-8', totalPrice > 400000 ? 'line-through': '']">
           Phí Ship: <span class="font-medium"> {{ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(25000) }}</span>
         </h3>
         <h3 class="text-2xl pt-4">
@@ -247,11 +247,11 @@ const totalPrice = ref(0)
 const totalAndShip = ref(0)
 
 const finalPrice = computed(() => {
-  if(totalPrice.value > 400000) {
+  if (totalPrice.value > 400000) {
     totalAndShip.value = totalPrice.value
     return totalAndShip.value
   }
-  else if(totalPrice.value < 400000) {
+  else if (totalPrice.value < 400000) {
     totalAndShip.value = totalPrice.value + 25000
     return totalAndShip.value
   }
@@ -272,9 +272,6 @@ const address = ref('')
 const user_id = ref('')
 const paymentMethod = ref('')
 const methodList = ['Thanh Toán Khi Nhận Hàng', 'Chuyển Khoản Ngân Hàng']
-
-
-
 
 const validate = () => {
   const errors = []
@@ -297,34 +294,34 @@ async function onSubmit(event) {
     description.value = order_id.value
     totalAmount.value = totalAndShip.value
     openModal()
-  }else{
+  }
+  else {
     order_id.value = 'ORDER' + Date.now().toString()
     addOrder()
-    clearCart();
+    clearCart()
     reload.value++
     toast.add({ title: 'Order Thành Công !', timeout: 5000 })
     navigateTo(`/lich-su-mua-hang/${user_id.value}`)
-  
   }
 }
 
 const handleClose = async () => {
   addOrder()
-  clearCart();
+  clearCart()
   reload.value++
   toast.add({ title: 'Order Thành Công !', timeout: 5000 })
   navigateTo(`/lich-su-mua-hang/${user_id.value}`)
 }
 
 const clearCart = () => {
-  window.localStorage.setItem('cart-links', JSON.stringify([])); // Set 'cart-links' to an empty array
-};
+  window.localStorage.setItem('cart-links', JSON.stringify([])) // Set 'cart-links' to an empty array
+}
 
 const addOrder = async () => {
   const now = new Date()
   const date = now.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
   const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
-
+  const month = `${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getFullYear()}`
   const { data } = await useFetch(`https://linkss.pages.dev/api/orders/addOrder`, {
     method: 'POST',
     body: {
@@ -340,6 +337,7 @@ const addOrder = async () => {
         status: 'Đang Xử Lý',
         date: date,
         time: time,
+        month: month,
         revenue: totalPrice.value - totalRevenue.value,
       },
       products: displayList.value.displayList,
@@ -349,15 +347,15 @@ const addOrder = async () => {
 }
 
 const startTimer = () => {
-  intervalId = setInterval( async() => {
+  intervalId = setInterval(async () => {
     if (timer.value > 0) {
       timer.value--
       if (timer.value < 60) {
         qrState.value = false
         clearInterval(intervalId)
         displayTimer.value = false
-        addOrder();
-        clearCart();
+        addOrder()
+        clearCart()
         reload.value++
         toast.add({ title: 'Order Thành Công !', timeout: 5000 })
         navigateTo(`/lich-su-mua-hang/${user_id.value}`)
@@ -428,7 +426,6 @@ const getListWard = (districtName) => {
     }
   })
 }
-
 
 // // check cart in local storage
 if (typeof window !== 'undefined') {

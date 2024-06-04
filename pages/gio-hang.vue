@@ -15,12 +15,18 @@
         <!-- cart -->
 
         <div class="w-full flex flex-col space-y-5 pt-12">
-          <div v-for="(product, index) in displayList.displayList" :key="index"
-            class="w-full flex justify-between items-center rounded-3xl p-5 border-2 border-black">
+          <div
+            v-for="(product, index) in displayList.displayList"
+            :key="index"
+            class="w-full flex justify-between items-center rounded-3xl p-5 border-2 border-black"
+          >
             <div class="flex space-x-8 justify-between">
-              <img :src="product.imageUrl[0]" alt="product"
+              <img
+                :src="product.imageUrl[0]"
+                alt="product"
                 class="w-32 h-32 transition-transform duration-500 ease-in-out transform hover:scale-105 cursor-pointer"
-                @click="navigateToProduct(product.product.product_id)">
+                @click="navigateToProduct(product.product.product_id)"
+              >
               <!-- name and price -->
               <div class="flex flex-col space-y-3">
                 <h3 class="text-2xl font-medium w-72">
@@ -30,47 +36,88 @@
                 <h4>
                   {{ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.product.price) }}
                 </h4>
-                <h4 class="text-red-600" v-if="product.product.stock == 0">Sản Phẩm Hết Hàng </h4>
+                <h4
+                  v-if="product.product.stock == 0"
+                  class="text-red-600"
+                >
+                  Sản Phẩm Hết Hàng
+                </h4>
               </div>
               <!-- quantity -->
               <div class="flex w-16 mt-1">
-                <UInput v-model="product.quantity" min="1" type="number" class="text-center"
-                  @change="updateQuantity(product.product.product_id, product.quantity)" />
+                <UInput
+                  v-model="product.quantity"
+                  min="1"
+                  type="number"
+                  class="text-center"
+                  @change="updateQuantity(product.product.product_id, product.quantity)"
+                />
               </div>
               <!-- thanh tien -->
               <div class="flex flex-col text-center items-end space-y-5 w-36 ">
                 <h4 class="text-lg font-medium mt-1">
-                  {{ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.product.price *
-                  product.quantity) }}
+                  {{ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.product.price
+                    * product.quantity) }}
                 </h4>
-                <UButton icon="i-heroicons-trash" :color="product.product.stock === 0 ? 'red' : 'white'" variant="ghost"
-                  size="lg" 
+                <UButton
+                  icon="i-heroicons-trash"
+                  :color="product.product.stock === 0 ? 'red' : 'white'"
+                  variant="ghost"
+                  size="lg"
                   :class="[
                     'transition ease-in-out delay-150 duration-300',
-                    product.product.stock === 0 ? 'scale-125 hover:-translate-y-1 hover:scale-175' : 'hover:-translate-y-1 hover:scale-125'
-                  ]" @click="removeFromCart(product.product.product_id)" />
+                    product.product.stock === 0 ? 'scale-125 hover:-translate-y-1 hover:scale-175' : 'hover:-translate-y-1 hover:scale-125',
+                  ]"
+                  @click="removeFromCart(product.product.product_id)"
+                />
               </div>
             </div>
           </div>
-          <UDivider size="sm" class="py-4" />
-          <div v-if="totalPrice != 0" class="text-end text-xl">
+          <UDivider
+            size="sm"
+            class="py-4"
+          />
+          <div
+            v-if="totalPrice != 0"
+            class="text-end text-xl"
+          >
             Tổng Tiền: <span class="font-medium"> {{ Intl.NumberFormat('vi-VN', {
-              style: 'currency', currency: 'VND'
+              style: 'currency', currency: 'VND',
             }).format(totalPrice) }} </span>
           </div>
-          <UDivider size="sm" class="py-4" />
-          <div v-if="totalPrice != 0" class="text-end pt-5">
-            <UButton size="xl" icon="i-heroicons-banknotes" class="w-1/4 rounded-3xl" to="/thanh-toan"
-              :trailing="false">
+          <UDivider
+            size="sm"
+            class="py-4"
+          />
+          <div
+            v-if="totalPrice != 0"
+            class="text-end pt-5"
+          >
+            <UButton
+              size="xl"
+              icon="i-heroicons-banknotes"
+              class="w-1/4 rounded-3xl"
+              to="/thanh-toan"
+              :trailing="false"
+            >
               Thanh Toán Ngay
             </UButton>
           </div>
         </div>
       </ClientOnly>
     </div>
-    <div v-else class="flex flex-col justify-between items-center space-y-5">
+    <div
+      v-else
+      class="flex flex-col justify-between items-center space-y-5"
+    >
       <h4>Chưa Có Sản Phẩm Nào Trong Giỏ Hàng Của Bạn</h4>
-      <UButton size="lg" to="/san-pham" block class="w-1/2 rounded-3xl" color="white">
+      <UButton
+        size="lg"
+        to="/san-pham"
+        block
+        class="w-1/2 rounded-3xl"
+        color="white"
+      >
         Mua Sắm Ngay
       </UButton>
     </div>

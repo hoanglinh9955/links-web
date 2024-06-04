@@ -33,8 +33,10 @@
 
       <!-- Buy now and add -->
       <div class="flex space-x-2 justify-around items-center w-full mb-3">
-     
-        <UButton @click="goToMuaNgay(product_id)" class="bg-primary-300 hover:bg-primary-400 w-3/4 justify-center items-center rounded-2xl">
+        <UButton
+          class="bg-primary-300 hover:bg-primary-400 w-3/4 justify-center items-center rounded-2xl"
+          @click="goToMuaNgay(product_id)"
+        >
           Mua Ngay
         </UButton>
         <div

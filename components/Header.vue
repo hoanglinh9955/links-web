@@ -23,7 +23,12 @@
     </UModal>
     <UModal v-model="isSearch">
       <div class="p-4">
-        <UInput v-model="searchValue" icon="i-heroicons-magnifying-glass-20-solid" placeholder="Nhập Tên Sản Phẩm Để Tìm Kiếm" @keyup.enter="goToSearch" />
+        <UInput
+          v-model="searchValue"
+          icon="i-heroicons-magnifying-glass-20-solid"
+          placeholder="Nhập Tên Sản Phẩm Để Tìm Kiếm"
+          @keyup.enter="goToSearch"
+        />
       </div>
     </UModal>
   </div>
@@ -37,7 +42,7 @@ const reload = storeToRefs(reloadState()).reloadState
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 const cartNum = ref('')
-const searchValue = ref('');
+const searchValue = ref('')
 const goToSearch = () => {
   isSearch.value = false
   navigateTo(`/tim-kiem/${searchValue.value}`)
@@ -97,8 +102,8 @@ links.value = [
     label: '',
     icon: 'i-heroicons-magnifying-glass',
     click: () => {
-          isSearch.value = true
-        },
+      isSearch.value = true
+    },
   }],
   [{
     label: 'Giỏ Hàng',
@@ -130,12 +135,12 @@ watchEffect(() => {
         // icon: 'i-heroicons-user-group',
         to: '/lien-he',
       }, {
-    label: '',
-    icon: 'i-heroicons-magnifying-glass',
-    click: () => {
+        label: '',
+        icon: 'i-heroicons-magnifying-glass',
+        click: () => {
           isSearch.value = true
         },
-  }],
+      }],
       [{
         label: 'Giỏ Hàng',
         icon: 'i-heroicons-shopping-bag',
@@ -176,12 +181,12 @@ watchEffect(() => {
         // icon: 'i-heroicons-user-group',
         to: '/lien-he',
       }, {
-    label: '',
-    icon: 'i-heroicons-magnifying-glass',
-    click: () => {
+        label: '',
+        icon: 'i-heroicons-magnifying-glass',
+        click: () => {
           isSearch.value = true
         },
-  }],
+      }],
       [{
         label: 'Giỏ Hàng',
         icon: 'i-heroicons-shopping-bag',

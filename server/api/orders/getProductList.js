@@ -1,8 +1,8 @@
 export default defineEventHandler(async (event) => {
-    try {
-        const query = getQuery(event)
-        
-      const result = await event.context.cloudflare.env.DB.prepare(
+  try {
+    const query = getQuery(event)
+
+    const result = await event.context.cloudflare.env.DB.prepare(
         `SELECT 
         o.order_id,
         p.product_id,
@@ -20,25 +20,23 @@ export default defineEventHandler(async (event) => {
     LEFT JOIN 
         images i ON p.product_id = i.product_id
     WHERE o.order_id = ?;
-    `,)
-        .bind(query.order_id).all()
-        
-        const uniqueProducts = Array.from(new Set(result.results.map(product => product.product_id)))
-    .map(product_id => result.results.find(product => product.product_id === product_id));
+    `)
+      .bind(query.order_id).all()
 
+    const uniqueProducts = Array.from(new Set(result.results.map(product => product.product_id)))
+      .map(product_id => result.results.find(product => product.product_id === product_id))
 
-      return {
-        success: true,
-        products: uniqueProducts
-      }
+    return {
+      success: true,
+      products: uniqueProducts,
     }
-    catch (e) {
-      console.error({
-        message: e.message,
-      })
-      return {
-        error: e.message,
-      }
+  }
+  catch (e) {
+    console.error({
+      message: e.message,
+    })
+    return {
+      error: e.message,
     }
-  })
-  
+  }
+})

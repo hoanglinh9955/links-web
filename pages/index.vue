@@ -51,7 +51,6 @@
         <CardContainer />
       </UContainer>
 
-
       <div class="flex justify-end w-1/2 space-x-8 items-center py-2">
         <UButton class=" bg-primary-400 hover:bg-primary-600 w-40 rounded-3xl justify-center transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300">
           Mua Ngay
@@ -69,7 +68,6 @@
         label="Bộ Sưu Tập"
       />
       <div class="flex flex-col justify-between items-center w-full space-y-9">
-      
         <UContainer class="flex w-3/4 justify-around space-x-8">
           <div>
             <img
@@ -87,7 +85,7 @@
             </h4>
           </div>
         </UContainer>
-      
+
         <UContainer class="flex w-3/4 justify-around space-x-8">
           <div class="flex flex-col justify-center items-center space-y-2">
             <h3 class="text-3xl">
@@ -105,7 +103,7 @@
             >
           </div>
         </UContainer>
-     
+
         <UContainer class="flex w-3/4 justify-around space-x-8">
           <div>
             <img

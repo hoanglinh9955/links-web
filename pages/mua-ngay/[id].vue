@@ -1,47 +1,141 @@
 <template>
   <UContainer class="flex">
     <div class="w-3/5 h-auto">
-      <UBreadcrumb class="p-5" size="xs" :links="links" />
+      <UBreadcrumb
+        class="p-5"
+        size="xs"
+        :links="links"
+      />
 
-      <UForm :validate="validate" class="flex flex-col w-full items-center justify-center space-y-3" @submit="onSubmit"
-        @error="onError">
+      <UForm
+        :validate="validate"
+        class="flex flex-col w-full items-center justify-center space-y-3"
+        @submit="onSubmit"
+        @error="onError"
+      >
         <h3 class="py-5 text-2xl font-medium">
           Thông Tin Giao Hàng
         </h3>
-        <UFormGroup class="w-4/5" name="user_name" label="Họ và Tên">
-          <UInput v-model="user_name" :ui="{ rounded: 'rounded-3xl' }" size="lg" class="w-full" />
+        <UFormGroup
+          class="w-4/5"
+          name="user_name"
+          label="Họ và Tên"
+        >
+          <UInput
+            v-model="user_name"
+            :ui="{ rounded: 'rounded-3xl' }"
+            size="lg"
+            class="w-full"
+          />
         </UFormGroup>
         <div class="flex w-4/5 justify-center space-x-1">
-          <UFormGroup class="w-1/2" name="email" label="Email">
-            <UInput v-model="email" :ui="{ rounded: 'rounded-3xl' }" size="lg" class="w-full" />
+          <UFormGroup
+            class="w-1/2"
+            name="email"
+            label="Email"
+          >
+            <UInput
+              v-model="email"
+              :ui="{ rounded: 'rounded-3xl' }"
+              size="lg"
+              class="w-full"
+            />
           </UFormGroup>
-          <UFormGroup class="w-1/2" name="phone_number" label="Số Điện Thoại">
-            <UInput v-model="phone_number" type="tel" name="phone_number" class="w-full" size="lg"
-              :ui="{ rounded: 'rounded-3xl' }" />
+          <UFormGroup
+            class="w-1/2"
+            name="phone_number"
+            label="Số Điện Thoại"
+          >
+            <UInput
+              v-model="phone_number"
+              type="tel"
+              name="phone_number"
+              class="w-full"
+              size="lg"
+              :ui="{ rounded: 'rounded-3xl' }"
+            />
           </UFormGroup>
         </div>
-        <UFormGroup class="w-4/5" name="selectedCity" label="Tỉnh Thành">
-          <USelect v-model="selectedCity" :ui="{ rounded: 'rounded-3xl' }" class="w-full" size="lg" :options="cities"
-            option-attribute="Name" placeholder="Chọn tỉnh thành" />
+        <UFormGroup
+          class="w-4/5"
+          name="selectedCity"
+          label="Tỉnh Thành"
+        >
+          <USelect
+            v-model="selectedCity"
+            :ui="{ rounded: 'rounded-3xl' }"
+            class="w-full"
+            size="lg"
+            :options="cities"
+            option-attribute="Name"
+            placeholder="Chọn tỉnh thành"
+          />
         </UFormGroup>
         <div class="flex w-4/5 space-x-2">
-          <UFormGroup class="w-1/2" name="selectedDistrict" label="Quận Huyện">
-            <USelect v-model="selectedDistrict" :ui="{ rounded: 'rounded-3xl' }" size="lg" class="w-full"
-              :options="districts" option-attribute="Name" placeholder="Chọn quận huyện" />
+          <UFormGroup
+            class="w-1/2"
+            name="selectedDistrict"
+            label="Quận Huyện"
+          >
+            <USelect
+              v-model="selectedDistrict"
+              :ui="{ rounded: 'rounded-3xl' }"
+              size="lg"
+              class="w-full"
+              :options="districts"
+              option-attribute="Name"
+              placeholder="Chọn quận huyện"
+            />
           </UFormGroup>
-          <UFormGroup class="w-1/2" name="selectedWard" label="Phường Xã">
-            <USelect v-model="selectedWard" :ui="{ rounded: 'rounded-3xl' }" size="lg" class="w-full" :options="wards"
-              option-attribute="Name" placeholder="Chọn phường xã" />
+          <UFormGroup
+            class="w-1/2"
+            name="selectedWard"
+            label="Phường Xã"
+          >
+            <USelect
+              v-model="selectedWard"
+              :ui="{ rounded: 'rounded-3xl' }"
+              size="lg"
+              class="w-full"
+              :options="wards"
+              option-attribute="Name"
+              placeholder="Chọn phường xã"
+            />
           </UFormGroup>
         </div>
-        <UFormGroup class="w-4/5" name="address" label="Địa Chỉ">
-          <UInput v-model="address" name="address" :ui="{ rounded: 'rounded-3xl' }" size="lg" class="w-full" />
+        <UFormGroup
+          class="w-4/5"
+          name="address"
+          label="Địa Chỉ"
+        >
+          <UInput
+            v-model="address"
+            name="address"
+            :ui="{ rounded: 'rounded-3xl' }"
+            size="lg"
+            class="w-full"
+          />
         </UFormGroup>
-        <UFormGroup class="w-4/5" name="selectedCity" label="Phương Thức Thanh Toán">
-          <USelect v-model="paymentMethod" :ui="{ rounded: 'rounded-3xl' }" class="w-full" size="lg"
-            :options="methodList" placeholder="Chọn phương thức thanh toán" />
+        <UFormGroup
+          class="w-4/5"
+          name="selectedCity"
+          label="Phương Thức Thanh Toán"
+        >
+          <USelect
+            v-model="paymentMethod"
+            :ui="{ rounded: 'rounded-3xl' }"
+            class="w-full"
+            size="lg"
+            :options="methodList"
+            placeholder="Chọn phương thức thanh toán"
+          />
         </UFormGroup>
-        <UButton class="w-4/5" size="lg" block type="submit">
+        <UButton
+          class="w-4/5"
+          size="lg"
+          block
+          type="submit"
+        >
           Đặt Hàng
         </UButton>
       </UForm>
@@ -53,8 +147,15 @@
         </h1>
         <div class="flex flex-col w-full items-center space-y-5">
           <div class="flex w-full justify-between">
-            <UChip :text="1" size="2xl">
-              <img :src="product.imageUrl[0]" alt="product" class="w-20 h-20 rounded-lg">
+            <UChip
+              :text="1"
+              size="2xl"
+            >
+              <img
+                :src="product.imageUrl[0]"
+                alt="product"
+                class="w-20 h-20 rounded-lg"
+              >
             </UChip>
             <h2> {{ product.product.product_name }} </h2>
             <h2 class="font-medium">
@@ -62,7 +163,7 @@
             </h2>
           </div>
         </div>
-        <h3 :class="['text-2xl pt-8', totalPrice > 400000 ? 'line-through': '' ]">
+        <h3 :class="['text-2xl pt-8', totalPrice > 400000 ? 'line-through': '']">
           Phí Ship: <span class="font-medium"> {{ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(25000) }}</span>
         </h3>
         <h3 class="text-2xl pt-4">
@@ -113,6 +214,7 @@
 <script setup>
 import QrCode from '~/components/qr-code.vue'
 import { reloadState } from '~/stores/storeModal'
+
 const route = useRoute()
 const links = [{
   label: 'Giỏ Hàng',
@@ -134,7 +236,6 @@ const displayTimer = ref(false)
 const isOpen = ref(false)
 const timer = ref(0)
 let intervalId
-
 
 const totalPrice = ref(0)
 const totalAndShip = ref(0)
@@ -166,8 +267,6 @@ const user_id = ref('')
 const paymentMethod = ref('')
 const methodList = ['Thanh Toán Khi Nhận Hàng', 'Chuyển Khoản Ngân Hàng']
 
-
-
 const validate = () => {
   const errors = []
   if (!email.value) errors.push({ path: 'email', message: 'Required' })
@@ -189,14 +288,14 @@ async function onSubmit(event) {
     description.value = order_id.value
     totalAmount.value = totalAndShip.value
     openModal()
-  } else {
+  }
+  else {
     order_id.value = 'ORDER' + Date.now().toString()
     addOrder()
 
     reload.value++
     toast.add({ title: 'Order Thành Công !', timeout: 5000 })
     navigateTo(`/lich-su-mua-hang/${user_id.value}`)
-
   }
 }
 
@@ -207,12 +306,11 @@ const handleClose = async () => {
   navigateTo(`/lich-su-mua-hang/${user_id.value}`)
 }
 
-
 const addOrder = async () => {
   const now = new Date()
   const date = now.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
   const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
-
+  const month = `${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getFullYear()}`
   const { data } = await useFetch(`https://linkss.pages.dev/api/orders/addOrder`, {
     method: 'POST',
     body: {
@@ -228,14 +326,15 @@ const addOrder = async () => {
         status: 'Đang Xử Lý',
         date: date,
         time: time,
+        month: month,
         revenue: totalPrice.value - totalRevenue.value,
       },
       products: [{
         product: product.value.product,
         quantity: 1,
-        imageUrl: [product.value.imageUrl[0]]
+        imageUrl: [product.value.imageUrl[0]],
 
-      }]
+      }],
     },
   })
   console.log(data)
@@ -249,7 +348,7 @@ const startTimer = () => {
         qrState.value = false
         clearInterval(intervalId)
         displayTimer.value = false
-        addOrder();
+        addOrder()
 
         reload.value++
         toast.add({ title: 'Order Thành Công !', timeout: 5000 })
@@ -322,7 +421,6 @@ const getListWard = (districtName) => {
   })
 }
 
-
 const { data: product } = await useFetch(`https://linkss.pages.dev/api/products/getProduct`, {
   query: { product_id: `${route.params.id}` },
 
@@ -348,7 +446,6 @@ const login = async () => {
   }
 }
 
-
 onMounted(() => {
   const user = useSupabaseUser()
   if (user.value == null) {
@@ -359,6 +456,4 @@ onMounted(() => {
   }
   getCityList()
 })
-
-
 </script>

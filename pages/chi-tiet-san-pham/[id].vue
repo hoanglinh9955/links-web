@@ -80,8 +80,8 @@
             size="lg"
             label="Mua Ngay"
             class="w-44 rounded-3xl justify-center items-center"
-            @click="goToMuaNgay(data.product.product_id)"
             :disabled="isStock"
+            @click="goToMuaNgay(data.product.product_id)"
           />
           <UButton
             size="lg"
@@ -91,15 +91,20 @@
               'transition ease-in-out delay-150 bg-red-600 -translate-y-5 scale-110 hover:bg-orange-500 duration-300': isAddToCart,
               'transition ease-in-out delay-150 -translate-y-0 duration-300': !isAddToCart, // Return to original position when isAddToCart is false
             }"
-            @click="addToCart"
             :disabled="isStock"
+            @click="addToCart"
           />
         </div>
-        <h1 class="text-red-600 text-lg" v-if="isStock">Hiện Tại Sản Phẩm Đã Hết Hàng</h1>
+        <h1
+          v-if="isStock"
+          class="text-red-600 text-lg"
+        >
+          Hiện Tại Sản Phẩm Đã Hết Hàng
+        </h1>
         <h1 v-if="quantityInCart > 0 ">
           <div v-if="!isStock">
-          Bạn Đang Có {{ quantityInCart }} Trong Giỏ Hàng
-        </div>
+            Bạn Đang Có {{ quantityInCart }} Trong Giỏ Hàng
+          </div>
         </h1>
       </div>
     </div>
@@ -139,10 +144,11 @@ const goToMuaNgay = (product_id) => {
 }
 
 const isStock = computed(() => {
-  if(data.value.product.stock === 0) {
+  if (data.value.product.stock === 0) {
     toast.add({ title: `Rất tiếc, ${data.value.product.product_name} đã hết hàng`, timeout: 9000 })
     return true
-  }else{
+  }
+  else {
     return false
   }
 })

@@ -3,9 +3,9 @@ export default defineEventHandler(async (event) => {
     const { order, products } = await readBody(event)
 
     const result1 = await event.context.cloudflare.env.DB.prepare(
-      `INSERT INTO 'orders' (order_id, user_id, user_name, phone_number, email, total, method, address, status, date, time, revenue)
-      VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12);`)
-      .bind(order.order_id, order.user_id, order.user_name, order.phone_number, order.email, order.total, order.method, order.address, order.status, order.date, order.time, order.revenue)
+      `INSERT INTO 'orders' (order_id, user_id, user_name, phone_number, email, total, method, address, status, date, time, revenue, month)
+      VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13);`)
+      .bind(order.order_id, order.user_id, order.user_name, order.phone_number, order.email, order.total, order.method, order.address, order.status, order.date, order.time, order.revenue, order.month)
       .run()
 
     for (let i = 0; i < products.length; i++) {

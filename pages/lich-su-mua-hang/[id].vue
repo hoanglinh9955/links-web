@@ -5,9 +5,9 @@
       :links="links"
     />
     <div
-      v-if="data.results.length > 0"
-      class="flex flex-col items-center space-y-5 pt-5 "
-    >
+  v-if="data.results.length > 0"
+  :class="`flex flex-col items-center space-y-5 pt-5 ${data.results.length === 1 ? 'h-[250px]' : ''}`"
+>
       <div
         v-for="(item, index) in [...data.results].reverse()"
         :key="index"

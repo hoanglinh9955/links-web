@@ -167,7 +167,7 @@
             </h2>
           </div>
         </div>
-        <h3 :class="['text-2xl pt-8', totalPrice > 400000 ? 'line-through': '']">
+        <h3 :class="['text-2xl pt-8', totalPrice > 500000 ? 'line-through': '']">
           Phí Ship: <span class="font-medium"> {{ Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(25000) }}</span>
         </h3>
         <h3 class="text-2xl pt-4">
@@ -247,11 +247,11 @@ const totalPrice = ref(0)
 const totalAndShip = ref(0)
 
 const finalPrice = computed(() => {
-  if (totalPrice.value > 400000) {
+  if (totalPrice.value > 500000) {
     totalAndShip.value = totalPrice.value
     return totalAndShip.value
   }
-  else if (totalPrice.value < 400000) {
+  else if (totalPrice.value < 500000) {
     totalAndShip.value = totalPrice.value + 25000
     return totalAndShip.value
   }
@@ -319,9 +319,12 @@ const clearCart = () => {
 
 const addOrder = async () => {
   const now = new Date()
-  const date = now.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
-  const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
-  const month = `${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getFullYear()}`
+const day = now.getDate().toString().padStart(2, '0');
+const month = (now.getMonth() + 1).toString().padStart(2, '0');
+const year = now.getFullYear();
+const date = `${day}-${month}-${year}`;
+const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+const monthYear = `${month}-${year}`;
   const { data } = await useFetch(`https://linkss.pages.dev/api/orders/addOrder`, {
     method: 'POST',
     body: {
@@ -337,7 +340,7 @@ const addOrder = async () => {
         status: 'Đang Xử Lý',
         date: date,
         time: time,
-        month: month,
+        month: monthYear,
         revenue: totalPrice.value - totalRevenue.value,
       },
       products: displayList.value.displayList,
@@ -427,12 +430,12 @@ const getListWard = (districtName) => {
   })
 }
 
-// // check cart in local storage
+// check cart in local storage
 if (typeof window !== 'undefined') {
   const value = window.localStorage.getItem('cart-links')
   const data = JSON.parse(value)
   if (data != null) {
-    cartNum.value = data.lengthqrState
+    cartNum.value = data.length
     productList.value = data
     status.value = true
   }
@@ -443,6 +446,15 @@ watch(reload, async () => {
   cartNum.value = data.length
   productList.value = data
 })
+
+const interval = setInterval(() => {
+  if (cartNum.value == undefined || cartNum.value == 0 || cartNum.value == null){
+    toast.add({ title: `Không Có Hàng Trong giỏ Hàng, Shopping Nào Khách ơi !!!`, timeout: 5000 })
+    navigateTo('/san-pham')
+    clearInterval(interval); // This will stop the interval
+  }
+  clearInterval(interval);
+}, 2000)
 
 setTimeout(async () => {
   const { data } = await useFetch(`https://linkss.pages.dev/api/products/getListProducts`, {

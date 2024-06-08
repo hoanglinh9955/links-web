@@ -268,7 +268,6 @@ const user_id = ref('')
 const paymentMethod = ref('')
 const methodList = ['Thanh Toán Khi Nhận Hàng', 'Chuyển Khoản Ngân Hàng']
 
-
 const validate = () => {
   const errors = []
   if (!email.value) errors.push({ path: 'email', message: 'Required' })
@@ -310,12 +309,12 @@ const handleClose = async () => {
 
 const addOrder = async () => {
   const now = new Date()
-const day = now.getDate().toString().padStart(2, '0');
-const month = (now.getMonth() + 1).toString().padStart(2, '0');
-const year = now.getFullYear();
-const date = `${day}-${month}-${year}`;
-const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
-const monthYear = `${month}-${year}`;
+  const day = now.getDate().toString().padStart(2, '0')
+  const month = (now.getMonth() + 1).toString().padStart(2, '0')
+  const year = now.getFullYear()
+  const date = `${day}-${month}-${year}`
+  const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
+  const monthYear = `${month}-${year}`
   const { data } = await useFetch(`https://linkss.pages.dev/api/orders/addOrder`, {
     method: 'POST',
     body: {

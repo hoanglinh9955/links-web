@@ -319,12 +319,12 @@ const clearCart = () => {
 
 const addOrder = async () => {
   const now = new Date()
-const day = now.getDate().toString().padStart(2, '0');
-const month = (now.getMonth() + 1).toString().padStart(2, '0');
-const year = now.getFullYear();
-const date = `${day}-${month}-${year}`;
-const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
-const monthYear = `${month}-${year}`;
+  const day = now.getDate().toString().padStart(2, '0')
+  const month = (now.getMonth() + 1).toString().padStart(2, '0')
+  const year = now.getFullYear()
+  const date = `${day}-${month}-${year}`
+  const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
+  const monthYear = `${month}-${year}`
   const { data } = await useFetch(`https://linkss.pages.dev/api/orders/addOrder`, {
     method: 'POST',
     body: {
@@ -448,12 +448,12 @@ watch(reload, async () => {
 })
 
 const interval = setInterval(() => {
-  if (cartNum.value == undefined || cartNum.value == 0 || cartNum.value == null){
+  if (cartNum.value == undefined || cartNum.value == 0 || cartNum.value == null) {
     toast.add({ title: `Không Có Hàng Trong giỏ Hàng, Shopping Nào Khách ơi !!!`, timeout: 5000 })
     navigateTo('/san-pham')
-    clearInterval(interval); // This will stop the interval
+    clearInterval(interval) // This will stop the interval
   }
-  clearInterval(interval);
+  clearInterval(interval)
 }, 2000)
 
 setTimeout(async () => {

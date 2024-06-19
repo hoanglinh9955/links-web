@@ -15,9 +15,9 @@ const totalAmount = storeToRefs(reloadState()).totalAmountGlobal
 
 const My_Bank = {
   BANK_ID: '970423',
-  ACCOUNT_NO: '98651198044',
+  ACCOUNT_NO: '04057132301',
   TEMPLATE: 'czSs4yJ',
-  ACCOUNT_NAME: 'LE HOANG LINH',
+  ACCOUNT_NAME: 'Trương Trí Vĩ',
   DESCRIPTION: description.value,
 }
 

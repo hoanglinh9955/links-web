@@ -54,7 +54,7 @@ onMounted(async () => {
   const user = useSupabaseUser()
   const name = user.value?.email
 
-  if (name && (name === 'hoanglinh9955@gmail.com' || name === 'ngancyndy@gmail.com')) {
+  if (name && (name === 'hoanglinh9955@gmail.com' || name === 'ngancyndy@gmail.com'|| name === 'vittss160360@fpt.edu.vn')) {
     isAdmin.value = true
     const router = useRouter()
     router.push('/admin/dashboard/home')
